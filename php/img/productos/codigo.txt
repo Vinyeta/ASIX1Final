@@ -1,0 +1,70 @@
+ [
+        "nombre" => "BubbleOps",
+        "descripcion" => "Sistema operativo innovador diseñado para entornos en la nube y sistemas distribuidos.",
+        "precio" => 49.99,
+        "img" => "img/productos/sistemas/bubbleops.jpg",
+        "categoria" => "Sistemas"
+    ],
+    [
+        "nombre" => "ChompOS",
+        "descripcion" => "Con una interfaz minimalista pero altamente configurable, ChompOS se adapta a servidores, dispositivos embebidos y estaciones de trabajo exigentes.",
+        "precio" => 55.00,
+        "img" => "img/productos/sistemas/chompos.jpg",
+        "categoria" => "Sistemas"
+    ],
+    [
+        "nombre" => "Computopia",
+        "descripcion" => "Sistema operativo futurista diseñado para ofrecer una experiencia de usuario completamente personalizada e intuitiva.",
+        "precio" => 97.50,
+        "img" => "img/productos/sistemas/computopia.jpg",
+        "categoria" => "Sistemas"
+    ],
+    [
+        "nombre" => "DreamPad",
+        "descripcion" => "Sistema operativo innovador diseñado para la creatividad y la productividad, combinando una interfaz inmersiva con herramientas avanzadas de diseño, escritura y multimedia.",
+        "precio" => 45.00,
+        "img" => "img/productos/sistemas/dreampad.jpg",
+        "categoria" => "Sistemas"
+    ],
+    [
+        "nombre" => "Euphoria",
+        "descripcion" => "Su interfaz fluida y sensorial se adapta dinámicamente a las preferencias del usuario, integrando realidad aumentada y controles gestuales para una interacción más natural.",
+        "precio" => 99.99,
+        "img" => "img/productos/sistemas/euphoria.jpg",
+        "categoria" => "Sistemas"
+    ],
+    [
+        "nombre" => "Funnix",
+        "descripcion" => "Con un fuerte enfoque en la seguridad y la creatividad, Funnix es ideal para estudiantes, creadores de contenido y cualquier persona que busque una experiencia digital más entretenida e intuitiva.",
+        "precio" => 34.99,
+        "img" => "img/productos/sistemas/funnix.jpg",
+        "categoria" => "Sistemas"
+    ],
+    [
+        "nombre" => "Happysys",
+        "descripcion" => "Con una interfaz amigable y colorida, incorpora elementos de bienestar digital, como recordatorios para pausas saludables, música relajante y modos de concentración inteligentes.",
+        "precio" => 59.99,
+        "img" => "img/productos/sistemas/happysys.jpg",
+        "categoria" => "Sistemas"
+    ],
+    [
+        "nombre" => "RedDwarf",
+        "descripcion" => "Sistema operativo ultraligero y optimizado para funcionar en entornos de bajo consumo y hardware compacto.",
+        "precio" => 85.50,
+        "img" => "img/productos/sistemas/reddwarf.jpg",
+        "categoria" => "Sistemas"
+    ],
+    [
+        "nombre" => "Runix",
+        "descripcion" => "Inspirado en Unix y Linux, combina la estabilidad de los sistemas tipo Unix con una interfaz intuitiva y moderna.",
+        "precio" => 89.99,
+        "img" => "img/productos/sistemas/runix.jpg",
+        "categoria" => "Sistemas"
+    ],    
+    [
+        "nombre" => "Wondrium",
+        "descripcion" => "Ideal para estudiantes, profesionales y cualquier persona interesada en explorar y expandir sus conocimientos de manera innovadora.",
+        "precio" => 42.00,
+        "img" => "img/productos/sistemas/wondrium.jpg",
+        "categoria" => "Sistemas"
+    ],

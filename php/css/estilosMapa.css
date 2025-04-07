@@ -1,0 +1,154 @@
+img{
+    width:100%;
+}
+body{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width:80%;
+    margin:auto;
+    background-color: #F4F1E1;
+}
+.panel{
+    position:absolute;
+    width:200px;
+    right:29%;
+    top:723px;
+}
+
+.texto {
+    animation: texto 10s linear infinite;
+    position:absolute;
+    white-space: nowrap; 
+    font-size:1.2em;
+    }
+  @keyframes texto {
+    0% {
+        right:-200px;
+       }
+    50% {
+        right:200px;
+        }
+    100%{
+        right:-200px;
+    }
+  }
+.velo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 1;
+}
+.velo.visible {
+    visibility: visible;
+    opacity: 1;
+}
+.mapa{
+    position:relative;
+    margin:50px auto;
+    background-image: url("../img/mapa.jpg");
+    background-size:100%;
+    background-repeat:no-repeat;
+    width:1280px;
+    height:800px;
+    border-radius:90px;
+    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.7), 0 10px 20px 0 rgba(0, 0, 0, 0.7);
+}
+
+#chin1,#chin2,#chin3,#chin4,#chin5{
+    position:absolute;
+    width:80px;
+    cursor:pointer;
+}
+#chin1{
+    left:543px;
+    top:278px;
+}
+#chin2{
+    left:281px;
+    top:278px;
+}
+#chin3{
+    left:362px;
+    top:500px;
+}
+#chin4{
+    left:1098px;
+    top:267px;
+}
+#chin5{
+    left:1083px;
+    top:572px;
+}
+/*VENTANA EMERGENTE*/
+
+.box{
+    position:absolute;
+    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.7), 0 10px 20px 0 rgba(0, 0, 0, 0.7);
+    top:27%;
+    left:33%;
+    border-radius:10px;
+    width:450px;
+    opacity:0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0.5s;
+    z-index: 2;
+ }
+ .box.visible{
+    animation: abrir 0.7s forwards;
+    background-color: antiquewhite;
+    opacity: 1;
+    visibility: visible;
+ }
+
+ @keyframes abrir {
+    0%{
+        opacity:0;
+        transform:scale(0.9);
+        visibility:hidden;
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+        visibility: visible;
+    }
+ }
+ .h1{
+    margin-top: 40px;
+ }
+ .imagen{
+    width:400px;
+    height:200px;
+ }
+ .contact{
+    display: flex;
+    justify-content: space-between;
+    width:400px;
+    font-style: italic;
+ }
+ .adress{
+    font-style: italic;
+    margin-top: 20px;
+ }
+ .cerrar{
+    width:35px;
+    position: absolute;
+    right:7px;
+    top:6px;
+    cursor:pointer;
+ }
+ #izq,#der{
+    width:30px;
+    position:absolute;
+    cursor:pointer;
+}
+#izq{
+    left: 176px;
+}
+#der{
+    left:246px;
+}
