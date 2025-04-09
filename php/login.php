@@ -14,7 +14,7 @@ session_start();
     ?>
 </head>
 <body>
-<!-- esto es una prueba -->
+
 
 <div class="contacta">Inicio de sesión</div>
 
