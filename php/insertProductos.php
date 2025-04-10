@@ -1,116 +1,116 @@
 <?php
 $productos = [
     [
-        'nombre' => 'NocdMON',
-        'descripcion' => 'Hosting de servicio backend en PHP',
-        'precio' => 27.54,
-        'img' => 'img/productos/web/phpHosting.jpg',
-        'categoria' => 'Web'
+        'nombre' => ';Starlink Standard Kit Wifi Satelital Router + Antena Wifi6 IP67 hasta 235 Dispositivos',
+        'descripcion' => 'Diseñado por SpaceX, Starlink le ofrece Internet de alta velocidad y baja latencia en las ubicaciones más rurales y remotas del mundo',
+        'precio' => 349,
+        'img' => 'img/productos/routers/starlink.webp',
+        'categoria' => 'Routers'
     ],
     [
-        'nombre' => 'JoSting',
-        'descripcion' => 'Hosting de frontend para frameworks en javascript como react o vue',
-        'precio' => 32.65,
-        'img' => 'img/productos/web/JSHosting.jpg',
-        'categoria' => 'Web'
+        'nombre' => 'TP-Link TL-MR100 Router Wi-Fi N 4G LTE',
+        'descripcion' => 'TP-Link TL-MR100 es un router 4G con un módem 4G LTE integrado y una ranura para tarjeta SIM incorporada',
+        'precio' => 44.90,
+        'img' => 'img/productos/routers/128-tp-link.webp',
+        'categoria' => 'Routers'
     ],
     [
-        'nombre' => 'FrontWind',
-        'descripcion' => 'Plantillas para componentes en HTML y CSS',
-        'precio' => 52.44,
-        'img' => 'img/productos/web/plantillas.jpg',
-        'categoria' => 'Web'
+        'nombre' => 'Strong 5GAX3000 Router Móvil Wifi 6 5G 3Gbps Blanco',
+        'descripcion' => '¡Acelera tu Internet con el router móvil 5G 5GAX3000 de Strong!',
+        'precio' =>189,
+        'img' => 'img/productos/routers/1279-strong.webp',
+        'categoria' => 'Routers'
     ],
     [
-        'nombre' => 'TypeForm',
-        'descripcion' => 'Formularios prehechos personalizables para recoger datos',
-        'precio' => 12.55,
-        'img' => 'img/productos/web/forms.jpg',
-        'categoria' => 'Web'
+        'nombre' => 'TP-Link Archer AX53 Router Wi-Fi 6 Gigabit de Doble Banda AX3000',
+        'descripcion' => 'La próxima generación de WiFi está aquí con el router Archer AX53. El Wi-Fi 6 (802.11ax) podría resultar ser el avance más significativo en el desarrollo del WiFi, ofreciendo un gran impulso en velocidad y capacidad total.',
+        'precio' => 59.99,
+        'img' => 'img/productos/routers/1339-tp-link-archer.webp',
+        'categoria' => 'Routers'
     ],
     [
-        'nombre' => 'Nodisocord',
-        'descripcion' => 'Libreria para servicio de hosting de canales de videollamada privados para tu web',
-        'precio' => 299.00,
-        'img' => 'img/productos/web/notDiscord.jpg',
-        'categoria' => 'Web'
+        'nombre' => 'Acer Predator Connect W6x Router WiFi 6 Doble Banda AX6000 MU-MIMO 4x4',
+        'descripcion' => 'Mejora tu arsenal digital con el Predator Connect W6x. Este potente router con Wi-Fi 6 ofrece velocidades de vértigo, una fiabilidad excepcional y la baja latencia que necesitas para disfrutar de una experiencia gaming impecable.',
+        'precio' => 99.00,
+        'img' => 'img/productos/routers/1781-acer-predator.webp',
+        'categoria' => 'Routers'
     ],
     [
-        'nombre' => 'Paloma',
-        'descripcion' => 'Libreria para servicio de hosting de chats privados o publicos para tu web',
-        'precio' => 29.99,
-        'img' => 'img/productos/web/chats.jpg',
-        'categoria' => 'Web'
+        'nombre' => 'Starlink Mini Kit Router WiFi Satelital Antena WiFi IP67 hasta 128 Dispositivos',
+        'descripcion' => 'Starlink Mini, un kit compacto y portátil, cabe fácilmente en una mochila y está diseñado para proporcionar internet de alta velocidad y baja latencia en cualquier lugar',
+        'precio' => 299.99,
+        'img' => 'img/productos/routers/1912-starlink-mini.webp',
+        'categoria' => 'Routers'
     ],
     [
-        'nombre' => 'Nomaps',
-        'descripcion' => 'Libreria para crear un servicio de geolocalización en tu web',
-        'precio' => 42.42,
-        'img' => 'img/productos/web/notMaps.jpg',
-        'categoria' => 'Web'
+        'nombre' => 'Acer Predator Connect T7 Router Wi-Fi 7 Mesh Triple Banda BE10700 Blanco',
+        'descripcion' => 'Disfruta de la experiencia de gaming Wi-Fi definitiva con el Acer Predator Connect T7  sin cables Ethernet.',
+        'precio' => 149.00,
+        'img' => 'img/productos/routers/1855-acer-predator.webp',
+        'categoria' => 'Routers'
     ],
     [
-        'nombre' => 'Nostripe',
-        'descripcion' => 'Servicio de pasarela de pago super segura para tu eshop',
-        'precio' => 33.78,
-        'img' => 'img/productos/web/notStripe.jpg',
-        'categoria' => 'Web'
+        'nombre' => 'TP-LINK TL-MR6400 Router 4G LTE Inalámbrico N 300Mbps',
+        'descripcion' => 'El router TP-Link TL-MR6400 utiliza tecnología 4G LTE para alcanzar velocidades de descarga de hasta 150 Mbps y carga de 50 Mbps.',
+        'precio' => 64.90,
+        'img' => 'img/productos/routers/1516-tp-link.webp',
+        'categoria' => 'Routers'
     ],
     [
-        'nombre' => 'YourSQL',
-        'descripcion' => 'Servicio de hosting de bases de datos SQL',
-        'precio' => 27.65,
-        'img' => 'img/productos/web/yourSQL.jpg',
-        'categoria' => 'Web'
+        'nombre' => 'Strong Router 4G LTE',
+        'descripcion' => 'Con su diseño extremadamente compacto y elegante, sólo tendrá que insertar una tarjeta SIM de cualquier operador para disfrutar inmediatamente de su conexión a Internet a velocidades de hasta 150 Mbit/s',
+        'precio' => 46.95,
+        'img' => 'img/productos/routers/1397-strong.webp',
+        'categoria' => 'Routers'
     ],
     [
-        "nombre" => "Redes locales",
-        "descripcion" => "Diseño, implementación y mantenimiento de redes locales para facilitar la comunicación y transferencia de datos dentro de una empresa.",
-        "precio" => 300.99,
-        "img" => "img/productos/redes/config_redes_locales.jpg",
-        "categoria" => "Redes"
+        "nombre" => "TP-Link RE705X Repetidor WiFi 6 Mesh Doble Banda AX3000",
+        "descripcion" => "El repetidor TP-Link RE705X es un dispositivo que se utiliza para extender la cobertura de una red WiFi existente en una casa o en una oficina.",
+        "precio" => 59.99,
+        "img" => "img/productos/puntosAcceso/3305-tp-link.webp",
+        "categoria" => "Puntos de Acceso"
     ],
     [
-        "nombre" => "Redes Wi-Fi",
-        "descripcion" => "Configuración, optimización y monitoreo de redes Wi-Fi, asegurando cobertura y velocidad en todos los puntos de la red.",
-        "precio" => 350.99,
-        "img" => "img/productos/redes/redes_inalambricas.jpg",
-        "categoria" => "Redes"
+        "nombre" => "Ubiquiti UniFi U6 Punto de Acceso RJ45 sin Inyector PoE",
+        "descripcion" => "Un punto de acceso compacto alimentado por PoE que mejora el U6 Lite al ofrecer un mayor rendimiento y soporte para WiFi6 de doble banda. Ideal para pequeñas y medianas empresas.",
+        "precio" => 128.35,
+        "img" => "img/productos/puntosAcceso/1501-ubiquiti.webp",
+        "categoria" => "Puntos de Acceso"
     ],
     [
-        "nombre" => "Gestión de redes",
-        "descripcion" => "Administración de la conexión a internet de la empresa, incluyendo la configuración de enrutadores, modems y balanceo de carga.",
-        "precio" => 240.99,
-        "img" => "img/productos/redes/gestion_conexiones.jpg",
-        "categoria" => "Redes"
+        "nombre" => "Ubiquiti Networks U6 Pro Punto de Acceso Inalámbrico WiFi 6 4800 Mbit/s PoE Blanco",
+        "descripcion" => "Punto de acceso WiFi 6 de alto rendimiento, montado en el techo, diseñado para grandes oficinas. Compatibilidad con WiFi 6 (bandas de 2,4/5 GHz), tasa de rendimiento agregado de 5,3 Gbps y con puerto GbE RJ45 (entrada PoE).",
+        "precio" => 189.90,
+        "img" => "img/productos/puntosAcceso/1329-ubiquiti.webp",
+        "categoria" => "Puntos de Acceso"
     ],
     [
-        "nombre" => "Seguridad",
-        "descripcion" => "Implementación de firewalls, sistemas de detección de intrusos (IDS), VPN (Red Privada Virtual) y políticas de seguridad para proteger los datos y la infraestructura de la red.",
-        "precio" => 750.99,
-        "img" => "img/productos/redes/seguridad_red.jpg",
-        "categoria" => "Redes"
+        "nombre" => "TP-LINK TL-WA854RE Repetidor WiFi/Amplificador 300Mbps",
+        "descripcion" => "El TP-LINK TL-WA854RE está diseñado para extender convenientemente la cobertura y mejorar la intensidad de la señal de una red inalámbrica existente para eliminar las zonas muertas.",
+        "precio" => 14.90,
+        "img" => "img/productos/puntosAcceso/1-tp-link.webp",
+        "categoria" => "Puntos de Acceso"
     ],
     [
-        "nombre" => "Soporte técnico",
-        "descripcion" => "Diagnóstico y solución de problemas relacionados con la conectividad, lentitud de la red, o fallos en los dispositivos conectados a la red.",
-        "precio" => 450.99,
-        "img" => "img/productos/redes/soporte_tecnico.jpg",
-        "categoria" => "Redes"
+        "nombre" => "Ubiquiti U6-LR Punto de Acceso Wifi 6 3000 Mbit/s PoE",
+        "descripcion" => "El punto de acceso WiFi 6 de largo alcance (U6 LR) es un punto de acceso de alto rendimiento que brinda una potente cobertura WiFi 6 de cuatro flujos a las redes empresariales.",
+        "precio" => 219.99,
+        "img" => "img/productos/puntosAcceso/1123-ubiquiti.webp",
+        "categoria" => "Puntos de Acceso"
     ],
     [
-        "nombre" => "Monitorización",
-        "descripcion" => "Vigilancia constante de la infraestructura de la red para garantizar un rendimiento óptimo, detectando y solucionando problemas de manera proactiva.",
-        "precio" => 150.99,
-        "img" => "img/productos/redes/monitoreo_redes.jpg",
-        "categoria" => "Redes"
+        "nombre" => "Ubiquiti U-POE-AT Adaptador PoE Mesh 30W",
+        "descripcion" => "El Ubiquiti U-POE-AT es un adaptador que puede alimentar dispositivos UniFi PoE+ con aplicaciones de malla inalámbrica o descargar las dependencias de energía del conmutador PoE.",
+        "precio" => 18.98,
+        "img" => "img/productos/puntosAcceso/1782-ubiquiti.webp",
+        "categoria" => "Puntos de Acceso"
     ],
     [
-        "nombre" => "Mantenimiento",
-        "descripcion" => "Mantenimiento y gestión de servidores, incluyendo la configuración de servicios como DHCP, DNS y servidores de archivos.",
-        "precio" => 950.99,
-        "img" => "img/productos/redes/admin_servidores.jpg",
-        "categoria" => "Redes"
+        "nombre" => "Ubiquiti UniFi UAP-AC-PRO Punto de Acceso Doble Banda PoE 2.4 GHz",
+        "descripcion" => "El punto de acceso UniFi AC PRO cuenta con la última tecnología Wi-Fi 802.11ac y 3x3 MIMO, con un diseño industrial refinado ideal para despliegues de largo alcance de redes inalámbricas de alto rendimiento.",
+        "precio" => 183.35,
+        "img" => "img/productos/puntosAcceso/c1.webp",
+        "categoria" => "Puntos de Acceso"
     ],
     [
         "nombre" => "Data recovery",
