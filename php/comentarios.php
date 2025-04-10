@@ -2,6 +2,7 @@
 
 require_once('conexionok.php'); 
 
+echo "holiiiii";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id_usuario=$_POST['id_usuario'];
