@@ -113,18 +113,18 @@ $productos = [
         "categoria" => "Puntos de Acceso"
     ],
     [
-        "nombre" => "Data recovery",
-        "descripcion" => "Implementación de soluciones para el respaldo de información y procedimientos para la recuperación de datos en caso de fallos en la red.",
-        "precio" => 550.99,
-        "img" => "img/productos/redes/recup_datos.jpg",
-        "categoria" => "Redes"
+        "nombre" => "TP-LINK TL-WA860RE Repetidor WiFi/Amplificador 300Mbps",
+        "descripcion" => "El TL-WA860RE de TP-LINK está diseñado para expandir cómodamente la cobertura y mejorar la intensidad de la señal de una red inalámbrica existente para eliminar las zonas muertas.",
+        "precio" => 24.99,
+        "img" => "img/productos/puntosAcceso/tl-wa860.webp",
+        "categoria" => "Puntos de Acceso"
     ],
     [
-        "nombre" => "Innovación",
-        "descripcion" => "Evaluación y adopción de nuevas tecnologías de red, como el IoT (Internet de las cosas), redes 5G, o software-defined networking (SDN), para mejorar la infraestructura de la red.",
-        "precio" => 1200.99,
-        "img" => "img/productos/redes/new_tech.jpg",
-        "categoria" => "Redes"
+        "nombre" => "TP-Link RE315 Repetidor WiFi AC1200/Doble Banda",
+        "descripcion" => "Conecta el extensor de red RE315 a un router compatible con la tecnología OneMesh™ para crear una única red Wi-Fi con el mismo nombre y contraseña.",
+        "precio" => 34.99,
+        "img" => "img/productos/puntosAcceso/195-tp-link.webp",
+        "categoria" => "Puntos de Acceso"
     ],
     [
         "nombre" => "BubbleOps",
