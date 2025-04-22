@@ -16,7 +16,7 @@ if ($con->query($sql) === FALSE) {
 $sql="CREATE TABLE IF NOT EXISTS usuarios(
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(20),
-    pass VARCHAR(20),
+    pass VARCHAR(200),
     email VARCHAR(50),
     hobby JSON,
     sexos VARCHAR(10),
