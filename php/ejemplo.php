@@ -15,7 +15,7 @@ $mail->isSMTP();
 $mail->Host = 'smtp.gmail.com';
 $mail->SMTPAuth = true;
 $mail->Username = 'fastconnect43@gmail.com';
-$mail->Password = 'fastconnect12';
+$mail->Password = 'bhxp bxmn lylx kotj';
 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 $mail->Port = 587;
 // Opciones de SSL
