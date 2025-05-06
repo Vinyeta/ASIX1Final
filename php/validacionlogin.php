@@ -11,6 +11,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['usuarios']) && isset($_
             $_SESSION['id']=$fila['id'];
             $_SESSION['usuario']=$fila['usuario'];
             $_SESSION['contraseña']=$fila['pass'];
+            setcookie("usuario", $fila['usuario'], time() + (86400 * 3), "/");
+            setcookie("contraseña", $fila['pass'], time() + (86400 * 3), "/");
         }
         echo "<div class='errores'>
             <div>¡SESIÓN INICIADA! REDIRIGIENDO EN <span id='countdown'>3</span></div>
