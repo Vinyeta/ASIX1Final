@@ -4,9 +4,9 @@
 // Crear constantes para la base de datos
 
 define('SERVIDOR', 'localhost');
-define('USUARIO', 'typeformAdmin');
-define('PASSWORD', 'typeform');  
-define('BD', 'typeformcontacto');
+define('USUARIO', 'mytypeoscad6');
+define('PASSWORD', 'H678E5L4');  
+define('BD', 'registrotypeform');
 
 /*define('SERVIDOR', 'localhost');
 define('USUARIO', 'root');
