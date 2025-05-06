@@ -1,5 +1,9 @@
 
 <?php
+    if(isset($_COOKIE['usuario']) && isset($_COOKIE['contraseña'])){
+        $_SESSION['usuario']=$_COOKIE['usuario'];
+        $_SESSION['contraseña']=$_COOKIE['contraseña'];
+}
 if(isset($_SESSION['id'])){
     echo "<header>
         <a class='logotipo' href='index.php'>
