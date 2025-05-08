@@ -38,7 +38,7 @@ if($resultado->num_rows>0){
 /*
 require_once("conexionok.php");  // Incluye el archivo de conexión
 
-// Asegúrate de que la conexión sea válida antes de realizar la consulta
+
 if ($con->connect_error) {
     die("Conexión fallida: " . $con->connect_error);
 }
@@ -48,10 +48,8 @@ FROM opiniones
 JOIN usuarios ON opiniones.id_usuario=usuarios.id
 ORDER BY opiniones.fecha DESC";
 
-// Ejecutar la consulta
 $resultado = $con->query($sqlOpiniones);
 
-// Verificar si la consulta fue exitosa y hay resultados
 if ($resultado->num_rows > 0) {
     while ($fila = $resultado->fetch_assoc()) {
         $puntuacion = $fila['valoracion'];
