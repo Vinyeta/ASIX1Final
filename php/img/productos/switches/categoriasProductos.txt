@@ -1,0 +1,5 @@
+--categorias
+routers
+switches
+accesorios
+cables

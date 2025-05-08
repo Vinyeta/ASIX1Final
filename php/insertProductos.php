@@ -126,6 +126,7 @@ $productos = [
         "img" => "img/productos/puntosAcceso/195-tp-link.webp",
         "categoria" => "Puntos de Acceso"
     ],
+    [
         'nombre' => 'Cisco IE-3300',
         'descripcion' => 'Conmutador Ethernet Cisco Catalyst IE3300 IE-3300 con 8 puertos gestionable y 2 ranuras SFP. Los switches de Cisco cuentan con la escalabilidad necesaria para satisfacer las necesidades de redes de todos los tamaños.',
         'precio' => 2345.97,

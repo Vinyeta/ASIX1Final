@@ -21,8 +21,10 @@ require_once("header.php");
     
 <?php
 require_once("conexionok.php");
-$sql="SELECT * FROM usuarios";
-$result=$con->query($sql);
+$stmt = $con->prepare("SELECT * FROM usuarios");
+$stmt->execute();
+
+$result = $stmt->get_result();
 //$data=array[]
 //while ($result->num_rows > 0){ while ($row = $result->fetch_assoc()){
     // $data[]=$row}}
@@ -79,6 +81,7 @@ if($result->num_rows>0){
     }
     
 }
+$stmt->close();
 ?>
 <div id="marcador"></div>
 <form method="post" action="">
