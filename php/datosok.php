@@ -48,7 +48,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     if(isset($_POST['sexos'])){
         $sexo=$_POST['sexos'];
     } else {
-        $sexo="NS-NC";
+        $errores[]="Es obligatorio completar el campo sexo";
     }
 
     //VALIDACION TERMINOS
