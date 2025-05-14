@@ -1,13 +1,13 @@
 
 <?php
-    if(isset($_COOKIE['usuario']) && isset($_COOKIE['contraseña'])){
-        $_SESSION['usuario']=$_COOKIE['usuario'];
-        $_SESSION['contraseña']=$_COOKIE['contraseña'];
+if (isset($_COOKIE['usuario']) && isset($_COOKIE['contraseña'])) {
+    $_SESSION['usuario'] = $_COOKIE['usuario'];
+    $_SESSION['contraseña'] = $_COOKIE['contraseña'];
 }
-if(isset($_SESSION['id'])){
+if (isset($_SESSION['id'])) {
     echo "<header>
         <a class='logotipo' href='index.php'>
-            <img class='imglogo' src='img/logotype.png' alt='logo typeform'>
+            <img class='imglogo' src='img/logofastconnect.jpg' alt='logo typeform'>
         </a>
         <nav class='enlaces'>
             <a id='link' class='linkLogout' href='logout.php'>Logout</a>
@@ -22,7 +22,7 @@ if(isset($_SESSION['id'])){
 } else {
     echo "<header>
     <a href='index.php' class='logotipo'>
-            <img class='imglogo' src='img/logotype.png' alt='logo typeform'>
+            <img class='imglogo' src='img/logofastconnect.jpg' alt='logo typeform'>
         </a>
         <div class=enlacesBoton>
         <nav class='enlaces'>
