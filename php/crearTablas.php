@@ -20,9 +20,13 @@ $sql="CREATE TABLE IF NOT EXISTS usuarios(
     email VARCHAR(50),
     hobby JSON,
     sexos VARCHAR(10),
-    suscribir BOOLEAN	
+    suscribir BOOLEAN	,
+    token VARCHAR(150),
+    token_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
-    
+  // si usuarios ya existe modificar usando el siguiente comando:
+  // ALTER TABLE usuarios ADD token VARCHAR(150);
+  // ALTER TABLE usuarios ADD token_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
   if ($con->query($sql) === FALSE) {
     echo "Error creando tabla: " . $con->error;
     } 
