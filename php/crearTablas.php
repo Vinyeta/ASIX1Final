@@ -20,7 +20,8 @@ $sql="CREATE TABLE IF NOT EXISTS usuarios(
     email VARCHAR(50),
     hobby JSON,
     sexos VARCHAR(10),
-    suscribir BOOLEAN	
+    suscribir BOOLEAN	,
+    token VARCHAR(150),
     )";
     
   if ($con->query($sql) === FALSE) {
