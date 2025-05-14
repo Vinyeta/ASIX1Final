@@ -35,7 +35,7 @@ session_start();
         <input class="botonEnviar" type="submit" value="Enviar">
     </div>
     <?php
-        require_once("recuperarPass.php");
+        require_once("mailRecuperacion.php");
     ?>  
 </form> 
 <script src="js/javascript.js"></script>

@@ -8,20 +8,27 @@
     <link rel="stylesheet" href="css/registro_login.css"/>
     <?php
     require_once("header.php");
+    require_once("conexionok.php");
+    $token=htmlspecialchars(trim($_GET['token']));
+    $sql="SELECT id FROM usuarios WHERE token='$token' ";
+    $result=$con->query($sql);
+    if($result->num_rows>0){
+        while($fila=$result->fetch_assoc()){
+            $id=$fila['id'];
+        }
+    }
+    
     ?>
 </head>
 <body>
 
-
 <div class="contacta">Cambio de contraseña</div>
-
-
 
 <form method="post" action="updatePass.php">
 <section class="cajaFlex">
 </div>
     <fieldset class="ventana">
-    <legend class="leyenda">Datos de acceso</legend>
+    <legend class="leyenda">Contraseña nueva</legend>
     <section class="datos">
     <div class="cajaPassword">
         <div class="passwords">
@@ -32,6 +39,7 @@
             <input class="pasword"type="password" patter=".{8,}" id="password" size="30" title="Contraseña" name="contraseña" autofocus placeholder="Contraseña">     
         </div>
     </div>
+    <input type="hidden" name="id" value="<?php echo $id; ?>">
     </section>  
     </fieldset> 
     <div class="submit">
