@@ -48,6 +48,7 @@ session_start();
     <div class="submit">
         <input class="botonEnviar" type="submit" value="LOGIN">
     </div>
+    <a href="recuperarPass.php">¿Olvidaste tu contraseña?</a>
     <?php
     require_once ("validacionlogin.php");
     ?>
