@@ -1,7 +1,7 @@
 <?php
 $productos = [
     [
-        'nombre' => ';Starlink Standard Kit Wifi Satelital Router + Antena Wifi6 IP67 hasta 235 Dispositivos',
+        'nombre' => 'Starlink Standard Kit Wifi Satelital Router + Antena Wifi6 IP67 hasta 235 Dispositivos',
         'descripcion' => 'Diseñado por SpaceX, Starlink le ofrece Internet de alta velocidad y baja latencia en las ubicaciones más rurales y remotas del mundo',
         'precio' => 349,
         'img' => 'img/productos/routers/starlink.webp',
@@ -30,7 +30,7 @@ $productos = [
     ],
     [
         'nombre' => 'Acer Predator Connect W6x Router WiFi 6 Doble Banda AX6000 MU-MIMO 4x4',
-        'descripcion' => 'Mejora tu arsenal digital con el Predator Connect W6x. Este potente router con Wi-Fi 6 ofrece velocidades de vértigo, una fiabilidad excepcional y la baja latencia que necesitas para disfrutar de una experiencia gaming impecable.',
+        'descripcion' => 'Mejora tu arsenal digital con el Predator Connect W6x. Velocidades de vértigo, una fiabilidad excepcional y la baja latencia que necesitas para disfrutar de una experiencia gaming impecable.',
         'precio' => 99.00,
         'img' => 'img/productos/routers/1781-acer-predator.webp',
         'categoria' => 'Routers'
@@ -149,14 +149,14 @@ $productos = [
     ],
     [
         'nombre' => 'Cisco CBS110-16T-EU',
-        'descripcion' => 'Estos conmutadores de nivel de entrada asequibles, plug-and-play, proporcionan conmutación Gigabit Ethernet con características como Power over Ethernet (PoE), eficiencia energética y priorización de tráfico para una transformación digital perfecta.',
+        'descripcion' => 'Proporcionan conmutación Gigabit Ethernet con características como Power over Ethernet (PoE), eficiencia energética y priorización de tráfico para una transformación digital perfecta.',
         'precio' => 156.80,
         'img' => 'img/productos/switches/4.webp',
         'categoria' => 'Switches'
     ],
     [
         'nombre' => 'Cisco C1000-48P-4X-L',
-        'descripcion' => 'Este switch de red sencillo, flexible y seguro es ideal para las implementaciones fundamentales de IoT (Internet de las cosas). Funciona con el software Cisco IOS y cuenta con una CLI (interfaz de línea de comandos) y una interfaz de usuario web intuitiva.',
+        'descripcion' => 'Ideal para las implementaciones fundamentales de IoT (Internet de las cosas). Funciona con el software Cisco IOS y cuenta con una CLI (interfaz de línea de comandos) y una interfaz de usuario web intuitiva.',
         'precio' => 2646.00,
         'img' => 'img/productos/switches/5.webp',
         'categoria' => 'Switches'
@@ -193,9 +193,14 @@ $productos = [
 
 require_once("conexionok.php");
 
+$sql = "INSERT IGNORE INTO productos (nombre, descripcion, precio, img, categoria) 
+        VALUES (?, ?, ?, ?, ?)";
+$stmt = $con->prepare($sql);
 
-
-$sql = "INSERT IGNORE INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `img`, `categoria`) VALUES ";
+if (!$stmt) {
+    echo "Error preparando la consulta: " . $con->error;
+    exit;
+}
 
 foreach ($productos as $producto) {
     $nombre=$producto['nombre'];
@@ -203,18 +208,15 @@ foreach ($productos as $producto) {
     $precio=$producto['precio'];
     $img=$producto['img'];
     $categoria=$producto['categoria'];
-    $sql=$sql."(NULL, '$nombre', '$desc', '$precio', '$img','$categoria'),";
+    $stmt->bind_param('ssdss', $nombre, $desc, $precio, $img, $categoria);
+    
+    if (!$stmt->execute()) {
+        echo "Error insertando producto: " . $stmt->error;
+    }
 }
-$sql=rtrim($sql, ",");
-$sql=$sql.";";
-
-if ($con->query($sql) === TRUE) {
-    echo "Datos introducidos";
-  } else {
-    echo "Error introduciendo datos: " . $con->error;
-  }
-  
-  $con->close();
-  echo "<div><a href='index.php'>Volver</a></div>";
+echo "Datos introducidos";
+$stmt->close();
+$con->close();
+echo "<div><a href='index.php'>Volver</a></div>";
 
 ?>

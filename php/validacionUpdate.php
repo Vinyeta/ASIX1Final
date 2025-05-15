@@ -51,12 +51,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     if (empty($errores)) {
     require_once("conexionok.php");
     $id = $_POST['id'];
+    $passwdHash = password_hash($passwd, PASSWORD_DEFAULT);
     $sql = "UPDATE usuarios 
             SET usuario=?, pass=?, email=?, sexos=?, hobby=? 
             WHERE id=?";
 
     if ($stmt = $con->prepare($sql)) {
-        $stmt->bind_param('sssssi', $nombre, $passwd, $email, $sexo, $hobbyJson, $id);
+        $stmt->bind_param('sssssi', $nombre, $passwdHash, $email, $sexo, $hobbyJson, $id);
 
         if ($stmt->execute()) {
             echo "<div class='error'>¡Se han modificado los datos!</div>
@@ -89,6 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         echo "<div class='error'>$error</div>";
     }
 }
+
     echo "</div>";
 }  
 
