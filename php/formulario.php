@@ -74,7 +74,7 @@ require_once("conexionok.php");
         <div>
             <label for="web">
                 <?php
-                if($servicios == 'Web'){
+                if(isset($servicios) && $servicios == 'Web'){
                     echo "<input id='web'type='checkbox' name='hobby[]' value='Web' checked/>";
                 } else {
                     echo "<input id='web'type='checkbox' name='hobby[]' value='Web'/>";
@@ -86,7 +86,7 @@ require_once("conexionok.php");
         <div>
             <label for="redes">
                 <?php
-                if($servicios == 'Redes'){
+                if(isset($servicios) && $servicios == 'Redes'){
                     echo "<input id='redes'type='checkbox' name='hobby[]' value='Redes' checked/>";
                 } else {
                     echo "<input id='redes'type='checkbox' name='hobby[]' value='Redes'/>";
@@ -98,7 +98,7 @@ require_once("conexionok.php");
         <div>
             <label for="sistemas">
                 <?php
-                if($servicios == 'Sistemas'){
+                if(isset($servicios) && $servicios == 'Sistemas'){
                     echo "<input id='sistemas'type='checkbox' name='hobby[]' value='Sistemas' checked/>";
                 } else {
                     echo "<input id='sistemas'type='checkbox' name='hobby[]' value='Sistemas'/>";
@@ -112,7 +112,7 @@ require_once("conexionok.php");
             <label for="sexos">Sexo:
             <div>
                 <?php
-                if($sexo == 'Mujer'){
+                if(isset($sexo) && $sexo == 'Mujer'){
                     echo "<input id='sexo1' name='sexos'type='radio' value='Mujer' checked>";
                 } else {
                     echo "<input id='sexo1' name='sexos'type='radio' value='Mujer'>";
@@ -124,7 +124,7 @@ require_once("conexionok.php");
             </div>
             <div>
                 <?php
-                if($sexo == 'Hombre'){
+                if(isset($sexo) && $sexo == 'Hombre'){
                     echo "<input id='sexo2' name='sexos'type='radio' value='Hombre' checked>";
                 } else {
                     echo "<input id='sexo2' name='sexos'type='radio' value='Hombre'>";
@@ -136,7 +136,7 @@ require_once("conexionok.php");
             </div>
             <div>         
                 <?php
-                if($sexo == 'NS-NC'){
+                if(isset($sexo) && $sexo == 'NS-NC'){
                     echo "<input id='sexo3' name='sexos'type='radio' value='NS-NC' checked>";
                 } else {
                     echo "<input id='sexo3' name='sexos'type='radio' value='NS-NC'>";
