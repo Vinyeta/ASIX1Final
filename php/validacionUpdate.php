@@ -49,10 +49,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     //ACTUALIZACION DE DATOS
     echo "<div class='errores'>";
     if (empty($errores)) {
-        require_once("conexionok.php");
-        $id=$_POST['id'];
-        $sql= "UPDATE usuarios SET usuario='$nombre', pass='$passwd', sexos='$sexo', hobby='$hobbyJson' WHERE id=$id";
-        if($con->query($sql)===TRUE){
+    require_once("conexionok.php");
+    $id = $_POST['id'];
+    $sql = "UPDATE usuarios 
+            SET usuario=?, pass=?, email=?, sexos=?, hobby=? 
+            WHERE id=?";
+
+    if ($stmt = $con->prepare($sql)) {
+        $stmt->bind_param('sssssi', $nombre, $passwd, $email, $sexo, $hobbyJson, $id);
+
+        if ($stmt->execute()) {
             echo "<div class='error'>¡Se han modificado los datos!</div>
                   <div class='error'>Redirigiendo a página de usuarios en <span id='countdown'>3</span></div>
                   <script type='text/javascript'>
@@ -68,18 +74,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                               }, 1000); 
                           }
                       }, 1000);
-                    </script>";  
+                    </script>";
         } else {
             echo "<div class='error'>Error modificando datos: " . $con->error . "</div>";
         }
-        $con->close();
+        $stmt->close();
     } else {
-        echo "Revisa los siguientes campos:";
-        foreach ($errores as $error) {
-            echo "<div class='error'>$error</div>";
-        }
+        echo "<div class='error'>Error al preparar la consulta SQL: " . $con->error . "</div>";
     }
+    $con->close();
+} else {
+    echo "Revisa los siguientes campos:";
+    foreach ($errores as $error) {
+        echo "<div class='error'>$error</div>";
+    }
+}
     echo "</div>";
 }  
 
 ?> 
+

@@ -17,43 +17,55 @@ require_once("header.php");
 </head>
 <body>
 <?php
-    if(isset($_GET['id'])){
-    $_SESSION['idModify'] = $_GET['id'];  
+require_once("conexionok.php");
+if (isset($_GET['id'])) {
+    $_SESSION['idModify']=$_GET['id'];  
+    $idGet=$_SESSION['idModify'];  
 
-    require_once("conexionok.php");
-    $idGet = $_SESSION['idModify'];  
-    $sql = "SELECT * FROM usuarios WHERE id=$idGet";
-    $resultado = $con->query($sql);
-
-    if ($resultado->num_rows > 0) {
-        while ($fila = $resultado->fetch_assoc()) {
-            $name = $fila['usuario'];
-            $pswd = $fila['pass'];
-            $mail = $fila['email'];
-            $service = $fila['hobby'];
-            $service = json_decode($service);
-            $sex = $fila['sexos'];
+    $sql="SELECT * FROM usuarios WHERE id=?";
+    if ($stmt=$con->prepare($sql)) {
+        $stmt->bind_param('i', $idGet);
+        $stmt->execute();
+        $resultado=$stmt->get_result();
+        
+        if ($resultado->num_rows > 0) {
+            while ($fila = $resultado->fetch_assoc()) {
+                $name=$fila['usuario'];
+                $pswd=$fila['pass'];
+                $mail=$fila['email'];
+                $service=json_decode($fila['hobby']);
+                $sex=$fila['sexos'];
+            }
+        } else {
+            echo "<div class='error'>No se encontró el usuario</div>";
         }
+        $stmt->close();
     } else {
-        echo "<div class='error'>No se encontró el usuario</div>";
+        echo "Error al preparar la consulta.";
     }
 } else {
-    require_once("conexionok.php");
-    $idGet = $_SESSION['idModify'];
-    $sql = "SELECT * FROM usuarios WHERE id=$idGet";
-    $resultado = $con->query($sql);
+    $idGet=$_SESSION['idModify'];
+    $sql="SELECT * FROM usuarios WHERE id=?";
 
-    if ($resultado->num_rows > 0) {
-        while ($fila = $resultado->fetch_assoc()) {
-            $name = $fila['usuario'];
-            $pswd = $fila['pass'];
-            $mail = $fila['email'];
-            $service = $fila['hobby'];
-            $service = json_decode($service);
-            $sex = $fila['sexos'];
+    if($stmt=$con->prepare($sql)) {
+        $stmt->bind_param('i', $idGet);
+        $stmt->execute();
+        $resultado=$stmt->get_result();
+        
+        if ($resultado->num_rows > 0) {
+            while ($fila = $resultado->fetch_assoc()) {
+                $name=$fila['usuario'];
+                $pswd=$fila['pass'];
+                $mail=$fila['email'];
+                $service=json_decode($fila['hobby']);
+                $sex=$fila['sexos'];
+            }
+        } else {
+            echo "<div class='error'>No se encontró el usuario</div>";
         }
+        $stmt->close();
     } else {
-        echo "<div class='error'>No se encontró el usuario</div>";
+        echo "Error al preparar la consulta.";
     }
 }
 ?>
