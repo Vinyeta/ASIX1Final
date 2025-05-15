@@ -70,26 +70,38 @@ if ($con->query($sql) === FALSE) {
   echo "Error creando tabla: " . $con->error;
   } 
 
-  $sql = "CREATE TRIGGER after_insert_ventas
+  $sql = "
+  DELIMITER $$
+  
+  CREATE TRIGGER after_insert_ventas
   AFTER INSERT ON ventas
   FOR EACH ROW
   BEGIN
       INSERT INTO ranking (id_producto, ventas_count)
       VALUES (NEW.producto_id, 1)
-      ON DUPLICATE KEY UPDATE ventas_count = ventas_count + 1;";
-
+      ON DUPLICATE KEY UPDATE ventas_count = ventas_count + 1;
+  END$$
+  
+  DELIMITER ;
+  ";
 if ($con->query($sql) === FALSE) {
   echo "Error creando trigger: " . $con->error;
 }
 
-$sql = "CREATE TRIGGER after_delete_ventas
+$sql = "
+DELIMITER $$
+
+CREATE TRIGGER after_delete_ventas
 AFTER DELETE ON ventas
 FOR EACH ROW
 BEGIN
     UPDATE ranking
     SET ventas_count = ventas_count - 1
     WHERE id_producto = OLD.producto_id;
-END;";
+END$$
+
+DELIMITER ;
+";
 
 if ($con->query($sql) === FALSE) {
   echo "Error creando trigger: " . $con->error;
