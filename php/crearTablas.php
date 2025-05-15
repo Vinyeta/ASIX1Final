@@ -75,7 +75,7 @@ if ($con->query($sql) === FALSE) {
   FOR EACH ROW
   BEGIN
       INSERT INTO ranking (id_producto, ventas_count)
-      VALUES (NEW.producto_ id, 1)
+      VALUES (NEW.producto_id, 1)
       ON DUPLICATE KEY UPDATE ventas_count = ventas_count + 1;";
 
 if ($con->query($sql) === FALSE) {
