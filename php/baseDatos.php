@@ -42,7 +42,7 @@ if($result->num_rows>0){
                     <td class='columna1'>
                     <div class='datos'>
                         <div class='texto'>PASSWORD:</div>
-                        <div>{$fila['pass']}</div>
+                        <div>Ni de coña</div>
                     </div>
                     </td>
                     <td class='columna2'><b>SERVICIOS:</b><div class='servicios'>";

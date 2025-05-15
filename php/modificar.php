@@ -90,7 +90,7 @@ if (isset($_GET['id'])) {
         </div>
         <div class="inputKey">
             <img class="ojoAbierto" src="img/eyeOpen.svg"/>
-            <input class="pasword"type="password" patter=".{8,}" id="password" size="30" title="Contraseña" name="contraseña" autofocus value="<?php if(isset($pswd)){echo $pswd;}?>">   
+            <input class="pasword"type="password" patter=".{8,}" id="password" size="30" title="Contraseña" name="contraseña" autofocus>   
         </div>
         </div>
         <div class="emails">

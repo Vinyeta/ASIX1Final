@@ -22,17 +22,23 @@ require_once("header.php");
     <a class="enlaceProductos" href="productos.php#tus_productos">Ir a mis productos</a>
 <?php
 require_once("conexionok.php");
-//1 MOSTRAR CARRITO COMPRA
+// 1 MOSTRAR CARRITO COMPRA
 $idUsuario=$_SESSION['id'];
 $totalPrecio=0;
-//1.1 CONSULTA SQL, se asocian la clave foranea de ventas y la id de productos
-$carrito_sql= "SELECT ventas.producto_id, ventas.id, productos.nombre, productos.precio, productos.img 
-               FROM ventas JOIN productos ON ventas.producto_id=productos.id 
-               WHERE ventas.usuario_id=$idUsuario AND ventas.estado='carrito'";
-$result_carrito=$con->query($carrito_sql);
-if($result_carrito->num_rows>0){
+
+// 1.1 CONSULTA SQL, se asocian la clave foranea de ventas y la id de productos
+$carrito_sql="SELECT ventas.producto_id, ventas.id, productos.nombre, productos.precio, productos.img 
+              FROM ventas 
+              JOIN productos ON ventas.producto_id = productos.id 
+              WHERE ventas.usuario_id=? AND ventas.estado='carrito'";
+$stmt_carrito = $con->prepare($carrito_sql);
+$stmt_carrito->bind_param("i", $idUsuario);
+$stmt_carrito->execute();
+$result_carrito=$stmt_carrito->get_result();
+
+if ($result_carrito->num_rows > 0) {
     echo "<section class='productos__user__carrito'>";
-    while($carro=$result_carrito->fetch_assoc()){
+    while ($carro=$result_carrito->fetch_assoc()) {
         $imagenn=$carro['img'];
         $id_productoo=$carro['producto_id'];
         $prices=$carro['precio'];
@@ -51,7 +57,6 @@ if($result_carrito->num_rows>0){
               </div>
               </div>";
     }
-
     echo "<div class='error_carrito'></div>
           </section>
           <h4 class='total__carrito'>Total carrito: $totalPrecio €</h4>
@@ -61,79 +66,91 @@ if($result_carrito->num_rows>0){
 } else {
     echo "<div class='error_carrito'></div><h3 class='carrito_vacio'>No tienes productos en el carrito ¡Echa un vistazo!</h3>";
 }
-//1.2 CONSULTA SQL PARA ACTUALIZAR EL ESTADO DE VENTAS A COMPRADO
-if(isset($_POST['comprar'])){
-    $update_sql="UPDATE ventas JOIN productos ON ventas.producto_id=productos.id
-                  SET ventas.estado='comprado' WHERE ventas.usuario_id=$idUsuario AND ventas.estado='carrito'";
+$stmt_carrito->close();
 
-    if($con->query($update_sql)===TRUE){
+// 1.2 CONSULTA SQL PARA ACTUALIZAR EL ESTADO DE VENTAS A COMPRADO
+if (isset($_POST['comprar'])) {
+    $update_sql="UPDATE ventas 
+                 SET estado='comprado' 
+                 WHERE usuario_id=? AND estado='carrito'";
+    $stmt_update = $con->prepare($update_sql);
+    $stmt_update->bind_param("i", $idUsuario);
+    
+    if ($stmt_update->execute()) {
         echo "<script>
                 window.location.href='productos.php?mensaje=comprado';
               </script>";
     } else {
         echo "<div class='comprado'>Vaya...algo ha salido mal</div>";
     }
+    $stmt_update->close();
 }
+
 if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'comprado') {
     echo "<script>
           document.querySelector('.error_carrito').innerHTML='¡Gracias por tu compra!';
           </script>";
 }
-//1.3 CONSULTA SQL PARA QUITAR DEL CARRITO UN PRODUCTO
-if(isset($_POST['quitar'])){
+
+// 1.3 CONSULTA SQL PARA QUITAR DEL CARRITO UN PRODUCTO
+if (isset($_POST['quitar'])) {
     $id_quitar=$_POST['id_productoo'];
     $idUserr=$_SESSION['id'];
-    $delete_sql="DELETE FROM ventas 
-                 WHERE usuario_id=$idUserr
-                 AND producto_id=$id_quitar 
-                 AND estado='carrito'";
 
-    if($con->query($delete_sql)===TRUE){
+    $delete_sql="DELETE FROM ventas 
+                 WHERE usuario_id=? AND producto_id=? AND estado='carrito'";
+    $stmt_delete=$con->prepare($delete_sql);
+    $stmt_delete->bind_param("ii", $idUserr, $id_quitar);
+
+    if ($stmt_delete->execute()) {
         echo "<script>
                 window.location.href='productos.php?mensaje=quitado';
               </script>";
     } else {
         echo "<div class='error_carrito'>Vaya...algo ha salido mal</div>";
     }
+    $stmt_delete->close();
 }
-//FIN PARTE CARRITO COMPRA
+// FIN PARTE CARRITO COMPRA
 ?>
+
 
 <div id="filtro"></div>
 <fieldset class='bordeFiltro'><legend>Selecciona aquí la categoría</legend>
         <div class='producto__filtro'>
-            <a href='productos.php?categoria=Redes#filtro' title='Redes'><img class='imgRedes' src='img/Redes.png'></a>
-            <a href='productos.php?categoria=Sistemas#filtro' title='Sistemas'><img class='imgSistemas' src='img/Sistemas.png'></a>
-            <a href='productos.php?categoria=Web#filtro' title='Web'><img class='imgWeb' src='img/Web.png'></a>
+            <a href='productos.php?categoria=Routers#filtro' title='Routers'><img class='imgRouters' src='img/Routers.png'></a>
+            <a href='productos.php?categoria=Puntos de Acceso#filtro' title='Puntos de Acceso'><img class='imgPuntosAcceso' src='img/Puntos de acceso.png'></a>
+            <a href='productos.php?categoria=Switches#filtro' title='Switches'><img class='imgSwitches' src='img/Switches.png'></a>
             <a href='productos.php#filtro' title='Todos los productos'><img class='imgFiltro' src='img/Todo.png'></a>
             
         </div>
 </fieldset>
 
-
 <?php
-//MOSTRAR PRODUCTOS
-if(isset($_GET['categoria'])){
-    //2.1 MOSTRAR PRODUCTOS FILTRADOS, con get se obtiene variable de categoria y se utiliza para consulta SQL
-    $categoria=$_GET['categoria'];
+// MOSTRAR PRODUCTOS
+if (isset($_GET['categoria'])) {
+    // 2.1 MOSTRAR PRODUCTOS FILTRADOS
+    $categoria = $_GET['categoria'];
     $sql="SELECT productos.*
           FROM productos
           LEFT JOIN ventas ON productos.id = ventas.producto_id
-          WHERE productos.categoria = '$categoria'
-          AND ventas.estado IS NULL;";
-
-    $result=$con->query($sql);
-    $numProductos = $result->num_rows;
+          WHERE productos.categoria=? AND ventas.estado IS NULL;";
+    $stmt=$con->prepare($sql);
+    $stmt->bind_param("s", $categoria);
+    $stmt->execute();
+    $result=$stmt->get_result();
+    $numProductos=$result->num_rows;
     echo "<h2 class='tituloProductos'>Mostrando los productos de: $categoria [$numProductos]</h2>";
-    if($result->num_rows>0){
+    if ($result->num_rows > 0) {
         echo "<section class='productos'>";
-        while ($fila=$result->fetch_assoc()){
+        while ($fila=$result->fetch_assoc()) {
             $idProducto=$fila['id'];
             $img=$fila['img'];
             $seccion=$fila['categoria'];
+            $descripcion=$fila['descripcion'];
             echo "<div class='producto'>
                     <div class='producto__precio'>{$fila['precio']} €</div>
-                    <div class='producto__imagen'><img class='imagen' src='$img'></div>
+                    <div class='producto__imagen'><img class='imagen' title='$descripcion' src='$img'></div>
                     <h2 class='producto__nombre'>{$fila['nombre']}</h2>
                     <div class='producto__flex'>
                     <div class='producto__flex__categoria'><img class='iconoServ' title='$seccion' src='img/$seccion.png'></div>
@@ -142,28 +159,30 @@ if(isset($_GET['categoria'])){
                         <input type='submit' class='producto__flex__boton' value='Lo quiero'>
                     </form>
                     </div>
-              </div>";
+                </div>";
         }
         echo "</section>";
     }
+    $stmt->close();
 } else {
-    //2.2 MOSTRAR TODOS LOS PRODUCTOS
-    $sql = "SELECT productos.*
-            FROM productos
-            LEFT JOIN ventas ON productos.id = ventas.producto_id
-            WHERE ventas.estado IS NULL;";
+    // 2.2 MOSTRAR TODOS LOS PRODUCTOS
+    $sql="SELECT productos.*
+          FROM productos
+          LEFT JOIN ventas ON productos.id = ventas.producto_id
+          WHERE ventas.estado IS NULL;";
     $result=$con->query($sql);
     $numProductos=$result->num_rows;
     echo "<h2 class='tituloProductos'>Mostrando todos los productos [$numProductos]</h2>";
-    if($result->num_rows>0){
+    if ($result->num_rows > 0) {
         echo "<section class='productos'>";
-        while ($fila=$result->fetch_assoc()){
+        while ($fila=$result->fetch_assoc()) {
             $idProducto=$fila['id'];
             $img=$fila['img'];
             $seccion=$fila['categoria'];
+            $descripcion=$fila['descripcion'];
             echo "<div class='producto'>
                 <div class='producto__precio'>{$fila['precio']} €</div>
-                <div class='producto__imagen'><img class='imagen' src='$img'></div>
+                <div class='producto__imagen'><img class='imagen' title='$descripcion' src='$img'></div>
                 <h2 class='producto__nombre'>{$fila['nombre']}</h2>
                 <div class='producto__flex'>  
                 <div class='producto__flex__categoria'><img class='iconoServ' title='$seccion' src='img/$seccion.png'></div>
@@ -173,28 +192,32 @@ if(isset($_GET['categoria'])){
                 </form>
                 </div>
               </div>";
+        }
+        echo "</section>";
     }
-    echo "</section>";
-    }
-    
 }
+
+
 //2.3 CONSULTA PARA AÑADIR AL CARRITO
 if (isset($_POST['idProducto'])){
     $idUser=$_SESSION['id'];
     $id_producto=intval($_POST['idProducto']);
     //consulta para obtener precio de producto e insertarlo luego en la tabla ventas, es para calcular el precio total en el carrito
     //se podria hacer un join en el carrito si se tiene la clave foranea ¿?
-    $consultaPrecio="SELECT precio FROM productos WHERE id=$id_producto";
-    $resultado=$con->query($consultaPrecio);
+    $consultaPrecio=$con->prepare("SELECT precio FROM productos WHERE id=?");
+    $consultaPrecio->bind_param("i", $id_producto);
+    $consultaPrecio->execute();
+    $resultado=$consultaPrecio->get_result();
     if($resultado->num_rows>0){
         $producto=$resultado->fetch_assoc();
         $precio=$producto['precio'];
     }
-    
-    //DESCARTADO 2.4 ANTES DE INSERTAR COMPROBAR SI EL PRODUCTO ESTA EN EL CARRITO
-    $venta_sql="SELECT producto_id FROM ventas WHERE producto_id=$id_producto AND usuario_id=$idUser AND estado='carrito';";
-    $checkVenta=$con->query($venta_sql);
-    
+
+    ///DESCARTADO 2.4 ANTES DE INSERTAR COMPROBAR SI EL PRODUCTO ESTA EN EL CARRITO
+    $venta_sql = $con->prepare("SELECT producto_id FROM ventas WHERE producto_id=? AND usuario_id=? AND estado='carrito';");
+    $venta_sql->bind_param("ii", $id_producto, $idUser);
+    $venta_sql->execute();
+    $checkVenta=$venta_sql->get_result();
     if ($checkVenta->num_rows > 0) {
         echo "<script>
             document.querySelector('.error_carrito').innerHTML = 'Ya tienes este producto en el carrito';
@@ -202,8 +225,9 @@ if (isset($_POST['idProducto'])){
         </script>";
     } else {
         //insertar en tabla ventas y estado carrito para mostrarlo
-        $venta_sql = "INSERT INTO ventas(estado, usuario_id, producto_id, total) VALUES ('carrito', '$idUser', '$id_producto', '$precio')";
-        if ($con->query($venta_sql)===TRUE) {
+        $insertVenta=$con->prepare("INSERT INTO ventas(estado, usuario_id, producto_id, total) VALUES ('carrito', ?, ?, ?)");
+        $insertVenta->bind_param("iid", $idUser, $id_producto, $precio);
+        if ($insertVenta->execute()) {
             echo "<script>
                 window.location.href='productos.php';
             </script>";
@@ -212,22 +236,23 @@ if (isset($_POST['idProducto'])){
                         document.querySelector('.error_carrito').innerHTML='Error al añadir el producto';
                         window.location.href='productos.php';
                   </script>";
-    }
-} 
+        }
+    } 
 }
+
 //FIN AÑADIR AL CARRITO
+
 //3 MOSTRAR PRODUCTOS COMPRADOS
-?>  
-
-
-<?php
 $idUsuario=$_SESSION['id'];
-$venta_sql= "SELECT ventas.id, ventas.estado, productos.nombre, productos.precio, productos.img 
-             FROM ventas JOIN productos ON ventas.producto_id=productos.id 
-             WHERE ventas.usuario_id=$idUsuario AND ventas.estado='comprado'";
-$result_ventas=$con->query($venta_sql);
+$venta_sql = $con->prepare("SELECT ventas.id, ventas.estado, productos.nombre, productos.precio, productos.img 
+                            FROM ventas 
+                            JOIN productos ON ventas.producto_id=productos.id 
+                            WHERE ventas.usuario_id=? AND ventas.estado='comprado'");
+$venta_sql->bind_param("i", $idUsuario);
+$venta_sql->execute();
+$result_ventas=$venta_sql->get_result();
 $numComprados=$result_ventas->num_rows;
-if($result_ventas->num_rows>0){
+if($result_ventas->num_rows > 0){
     echo "<h2 id='tus_productos'>Tus productos [$numComprados]</h2>
           <section class='productos__user__comprado'>";
     while($venta=$result_ventas->fetch_assoc()){
@@ -252,16 +277,18 @@ if($result_ventas->num_rows>0){
     echo "<h2 class='carrito_vacio'>No tienes productos comprados</h2>";
 }
 
-//3.1 ELIMINAR PRODUCTO DE VENTAS
 
+//3.1 ELIMINAR PRODUCTO DE VENTAS
 if (isset($_POST['eliminar'])) {
     $id_devolver=$_POST['id_producto'];
-    $delete_sql="DELETE FROM ventas WHERE id=$id_devolver AND usuario_id={$_SESSION['id']}";
-    if ($con->query($delete_sql) === TRUE) {
+    $id_usuario=$_SESSION['id'];
+    $delete_sql=$con->prepare("DELETE FROM ventas WHERE id=? AND usuario_id=?");
+    $delete_sql->bind_param("ii", $id_devolver, $id_usuario);
+
+    if ($delete_sql->execute() === TRUE) {
         echo "<script>
                 window.location.href='productos.php?mensaje=devuelto';
               </script>";
-        
     } else {
         echo "<div><h4 id='eliminado'>No se ha podido devolver el producto</h4></div>";
         echo "<script>document.getElementById('eliminado').scrollIntoView();</script>";
@@ -275,9 +302,8 @@ if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'devuelto') {
           document.getElementById('eliminado').scrollIntoView();
           </script>";
 }
+
 ?>
-
-
 <script src="js/jsenlaces.js"></script>
 <script src="js/productos.js"></script>  
 </body>

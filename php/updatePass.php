@@ -7,20 +7,22 @@
     <title>Login</title>
     <link rel="stylesheet" href="css/header.css" />
     <link rel="stylesheet" href="css/registro_login.css" />
-    <?php
+<?php
     require_once("header.php");
     require_once("conexionok.php");
     $token = htmlspecialchars(trim($_GET['token']));
-    $sql = "SELECT id,token_creacion FROM usuarios WHERE token='$token' ";
-    $result = $con->query($sql);
+    $sql = $con->prepare("SELECT id, token_creacion FROM usuarios WHERE token = ?");
+    $sql->bind_param("s", $token);
+    $sql->execute();
+    $result = $sql->get_result();
     if ($result->num_rows > 0) {
         while ($fila = $result->fetch_assoc()) {
             $id = $fila['id'];
             $token_creacion = $fila['token_creacion'];
         }
     }
+?>
 
-    ?>
 </head>
 
 <body>
