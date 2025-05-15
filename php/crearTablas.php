@@ -70,6 +70,10 @@ if ($con->query($sql) === FALSE) {
   echo "Error creando tabla: " . $con->error;
   } 
 
+  if ($con->query("DELIMITER $$") === FALSE) {
+    echo "Error cambiando el delimitador: " . $con->error;
+}
+
   $sql = "CREATE TRIGGER after_insert_ventas
   AFTER INSERT ON ventas
   FOR EACH ROW
@@ -90,6 +94,10 @@ BEGIN
     SET ventas_count = ventas_count - 1
     WHERE id_producto = OLD.producto_id;
 END;";
+
+if ($con->query("DELIMITER ;") === FALSE) {
+  echo "Error restaurando el delimitador: " . $con->error;
+}
 
 if ($con->query($sql) === FALSE) {
   echo "Error creando trigger: " . $con->error;
