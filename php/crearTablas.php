@@ -96,6 +96,14 @@ if ($con->multi_query($sql) === FALSE) {
 }
 
 $con->close();
-
+DELIMITER $$
+CREATE TRIGGER after_delete_ventas
+AFTER DELETE ON ventas
+FOR EACH ROW
+BEGIN
+    UPDATE ranking
+    SET ventas_count = ventas_count - 1
+    WHERE id_producto = OLD.producto_id;
+END$$
 
 ?>
