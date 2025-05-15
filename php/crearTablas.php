@@ -66,42 +66,30 @@ if ($con->query($sql) === FALSE) {
     FOREIGN KEY (id_producto) REFERENCES productos(id) ON DELETE CASCADE
 );";
 
-if ($con->query($sql) === FALSE) {
+if ($con->multi_query($sql) === FALSE) {
   echo "Error creando tabla: " . $con->error;
   } 
 
-  $sql = "
-  DELIMITER $$
-  
-  CREATE TRIGGER after_insert_ventas
-  AFTER INSERT ON ventas
-  FOR EACH ROW
-  BEGIN
-      INSERT INTO ranking (id_producto, ventas_count)
-      VALUES (NEW.producto_id, 1)
-      ON DUPLICATE KEY UPDATE ventas_count = ventas_count + 1;
-  END$$
-  
-  DELIMITER ;
-  ";
+  $sql = "CREATE TRIGGER after_insert_ventas
+    AFTER INSERT ON ventas
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO ranking (id_producto, ventas_count)
+        VALUES (NEW.producto_id, 1)
+        ON DUPLICATE KEY UPDATE ventas_count = ventas_count + 1;
+    END";
 if ($con->multi_query($sql) === FALSE) {
   echo "Error creando trigger: " . $con->error;
 }
 
-$sql = "
-DELIMITER $$
-
-CREATE TRIGGER after_delete_ventas
+$sql = "CREATE TRIGGER after_delete_ventas
 AFTER DELETE ON ventas
 FOR EACH ROW
 BEGIN
     UPDATE ranking
     SET ventas_count = ventas_count - 1
     WHERE id_producto = OLD.producto_id;
-END$$
-
-DELIMITER ;
-";
+END";
 
 if ($con->multi_query($sql) === FALSE) {
   echo "Error creando trigger: " . $con->error;
