@@ -59,7 +59,43 @@ if ($con->query($sql) === FALSE) {
   echo "Error creando tabla: " . $con->error;
   } 
 
+  $sql = "CREATE TABLE IF NOT EXISTS ranking (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_producto INT,
+    ventas_count INT DEFAULT 0,
+    FOREIGN KEY (id_producto) REFERENCES productos(id) ON DELETE CASCADE
+);";
+
+if ($con->multi_query($sql) === FALSE) {
+  echo "Error creando tabla: " . $con->error;
+  } 
+
+  $sql = "CREATE TRIGGER after_insert_ventas
+    AFTER INSERT ON ventas
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO ranking (id_producto, ventas_count)
+        VALUES (NEW.producto_id, 1)
+        ON DUPLICATE KEY UPDATE ventas_count = ventas_count + 1;
+    END";
+if ($con->multi_query($sql) === FALSE) {
+  echo "Error creando trigger: " . $con->error;
+}
+
+$sql = "CREATE TRIGGER after_delete_ventas
+AFTER DELETE ON ventas
+FOR EACH ROW
+BEGIN
+    UPDATE ranking
+    SET ventas_count = ventas_count - 1
+    WHERE id_producto = OLD.producto_id;
+END";
+
+if ($con->multi_query($sql) === FALSE) {
+  echo "Error creando trigger: " . $con->error;
+}
+
 $con->close();
 
-    
+
 ?>
