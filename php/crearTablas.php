@@ -103,7 +103,7 @@ END$$
 DELIMITER ;
 ";
 
-if ($con->query($sql) === FALSE) {
+if ($con->multi_query($sql) === FALSE) {
   echo "Error creando trigger: " . $con->error;
 }
 
