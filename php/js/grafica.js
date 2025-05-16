@@ -1,5 +1,5 @@
 
-let miGrafica=null;
+let miGrafica=null; 
 const nombres=[];
 const valores=[];
 fetch('../php/getProductosRanking.php')
@@ -9,9 +9,9 @@ fetch('../php/getProductosRanking.php')
         data.forEach(item => {
             nombres.push(item.nombre);
             valores.push(item.ventas_count);
+            dibujarGrafica(nombres, valores);
         });
     })
-dibujarGrafica(nombres, valores);
 function dibujarGrafica(nombres, valores){
     // Dibujar la gráfica (en vez de hoja y miGrafica puedes poner el nombre que quieras)
     let hoja = document.querySelector('.miGrafica').getContext('2d');
@@ -40,6 +40,11 @@ function dibujarGrafica(nombres, valores){
             }]
         },
         options: {
+            plugins: {
+                legend: {
+                    display: false 
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: true, // que empiece a contar a partir de 0
@@ -50,8 +55,28 @@ function dibujarGrafica(nombres, valores){
                 },
                 x: {
                     ticks: {
-                        color: 'black' // el color del texto del texto de la barra horizontal (HTML, CSS)
-                    }
+                        color: 'black',
+                        maxRotation: 0, 
+                        align:'justify',
+                        callback: function(value,index,values) {
+                            const text= nombres[index];
+                            const words = text.split(' ');
+                            if (words.length > 4) {
+                                return [
+                                    words.slice(0, 2).join(' '), 
+                                    words.slice(2, 6).join(' '), 
+                                    words.slice(6).join(' ')    
+                                ];
+                            } else if (words.length > 2) {
+                                return [
+                                    words.slice(0, 2).join(' '),
+                                    words.slice(2).join(' ') 
+                                ];
+                            } else {
+                                return text; 
+                            }
+                        }
+                    },
                 }
             },
             responsive: true, // las barras se adapan al ancho | alto del navegador

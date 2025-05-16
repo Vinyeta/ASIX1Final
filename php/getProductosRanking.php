@@ -5,7 +5,7 @@
     $stmt = $con->prepare($sql);
 
     // Límite de productos a mostrar
-    $limit = 10;
+    $limit = 5;
     $stmt->bind_param("i", $limit);
 
     // Ejecutar la consulta
