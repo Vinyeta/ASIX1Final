@@ -1,17 +1,41 @@
+let miGrafica = null; 
 
-let miGrafica=null; 
-const nombres=[];
-const valores=[];
-fetch('../php/getProductosRanking.php')
+document.querySelector('#btnProductos').addEventListener('click', ()=>mostrarProductos());
+document.querySelector('#btnCategorias').addEventListener('click',()=> mostrarCategorias());
+const mostrarProductos=()=>{
+    fetch('../php/getProductosRanking.php')
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+        const nombres=[];
+        const valores=[];
         data.forEach(item => {
             nombres.push(item.nombre);
             valores.push(item.ventas_count);
             dibujarGrafica(nombres, valores);
+            locucion(`El producto más vendido es ${item.producto} con ${item.ventas_count} productos vendidos`);
         });
     })
+    .catch(error => {
+        console.error('Error al obtener los datos:', error);
+    });
+}
+const mostrarCategorias = ()=>{
+    fetch('../php/getCategoriasRanking.php')
+    .then(response => response.json())
+    .then(data => {
+        const nombres=[];
+        const valores=[];
+        data.forEach(item => {
+            nombres.push(item.categoria);
+            valores.push(item.total_ventas);
+            dibujarGrafica(nombres, valores);
+            locucion(`La categoria más vendida es ${item.categoria} con ${item.total_ventas} productos vendidos`);
+        });
+    })
+    .catch(error => {
+        console.error('Error al obtener los datos:', error);
+    });
+};
 function dibujarGrafica(nombres, valores){
     // Dibujar la gráfica (en vez de hoja y miGrafica puedes poner el nombre que quieras)
     let hoja = document.querySelector('.miGrafica').getContext('2d');
@@ -58,14 +82,16 @@ function dibujarGrafica(nombres, valores){
                         color: 'black',
                         maxRotation: 0, 
                         align:'justify',
-                        callback: function(value,index,values) {
+                        callback: function(index) {
+                            console.log(nombres[index])
                             const text= nombres[index];
                             const words = text.split(' ');
                             if (words.length > 4) {
                                 return [
-                                    words.slice(0, 2).join(' '), 
-                                    words.slice(2, 6).join(' '), 
-                                    words.slice(6).join(' ')    
+                                    words.slice(0, 4).join(' '), 
+                                    words.slice(4, 8).join(' '), 
+                                    words.slice(8,12).join(' '),
+                                    words.slice(12).join(' ')
                                 ];
                             } else if (words.length > 2) {
                                 return [
@@ -83,3 +109,14 @@ function dibujarGrafica(nombres, valores){
             maintainAspectRatio: false, // permite modificarlo con CSS
         }})
     } // Cierro la función
+const locucion= (texto)=>{;
+                        let locucion = new SpeechSynthesisUtterance(texto);
+                        locucion.lang = 'es-ES';
+                        locucion.pitch = 1.3;
+                        locucion.rate = 1.25;   
+                        if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+                            window.speechSynthesis.cancel();
+                        }
+                        window.speechSynthesis.speak(locucion);     
+}
+mostrarProductos();

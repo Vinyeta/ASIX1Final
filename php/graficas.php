@@ -13,9 +13,13 @@
     <link rel="stylesheet" href="css/grafica.css"/>
 </head>
 <body>
-    <div class="container">
-        <canvas class="miGrafica"></canvas>
-    </div>
+        <div class='botones'>
+            <button class="boton" id="btnProductos">Ranking</button>
+            <button class="boton" id="btnCategorias">Categorias</button>
+        </div>
+        <div>
+            <canvas class="miGrafica"></canvas>
+        </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/grafica.js"></script>

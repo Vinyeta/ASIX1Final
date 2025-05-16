@@ -1,7 +1,11 @@
 <?php
     require_once('conexionok.php');
 
-    $sql = "SELECT * FROM ranking ORDER BY ventas_count DESC LIMIT ?";
+    $sql = "SELECT categoria, SUM(ventas_count) AS total_ventas 
+        FROM ranking 
+        GROUP BY categoria 
+        ORDER BY total_ventas DESC 
+        LIMIT ?";
     $stmt = $con->prepare($sql);
 
     // Límite de productos a mostrar
@@ -12,7 +16,7 @@
     $stmt->execute();
     $result = $stmt->get_result();
     while ($fila = $result->fetch_assoc()) {
-        $productos[] = $fila;
+        $categorias[] = $fila;
     }
-    echo  json_encode($productos);
+    echo  json_encode($categorias);
 ?>
