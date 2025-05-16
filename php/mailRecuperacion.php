@@ -10,14 +10,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require '../PHPMailer/src/Exception.php';
     require_once("conexionok.php");
     $email = $_POST['email'];
-    $sql = "SELECT id FROM usuarios WHERE email='$email';";
-    $result = $con->query($sql);
+    $sql = $con->prepare("SELECT id FROM usuarios WHERE email = ?");
+    $sql->bind_param("s", $email);
+    $sql->execute();
+    $result = $sql->get_result();
     if ($result->num_rows > 0) {
         $token = bin2hex(random_bytes(16));
         $tokenCreatedAt = date('Y-m-d H:i:s');
-        $sql = "UPDATE usuarios SET token='$token', token_creacion='$tokenCreatedAt' WHERE email='$email'";
-        $result = $con->query($sql);
-        if ($result === FALSE) {
+        $update_sql = $con->prepare("UPDATE usuarios SET token = ?, token_creacion = ? WHERE email = ?");
+        $update_sql->bind_param("sss", $token, $tokenCreatedAt, $email);
+        if ($update_sql->execute() === FALSE) {
             echo "<div class='errores'><div>Error en el proceso de recuperación de contraseña</div></div>";
         } else {
 
@@ -65,3 +67,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     $con->close();
 }
+?>

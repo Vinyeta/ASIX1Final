@@ -45,7 +45,7 @@ legend{
     display:flex;
     justify-content: space-around;
 }
-.imgRedes,.imgSistemas,.imgWeb,.imgFiltro{
+.imgRouters,.imgPuntosAcceso,.imgSwitches,.imgFiltro{
     width:50px;
 }
 .bordeFiltro{

@@ -3,7 +3,7 @@ session_start();
 
 require_once("header.php");
 require_once("conexionok.php");
-
+require_once("datosok.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -73,38 +73,38 @@ require_once("conexionok.php");
     <div class="servicios">Servicios:
         <div>
             <label for="web">
-                <?php
-                if(isset($servicios) && $servicios == 'Web'){
-                    echo "<input id='web'type='checkbox' name='hobby[]' value='Web' checked/>";
-                } else {
-                    echo "<input id='web'type='checkbox' name='hobby[]' value='Web'/>";
-                }
-                ?>
-                Web
-            </label>
+            <?php
+            if (isset($hobby) && in_array('Web', $hobby)) {
+                echo "<input id='web' type='checkbox' name='hobby[]' value='Web' checked />";
+            } else {
+                echo "<input id='web' type='checkbox' name='hobby[]' value='Web' />";
+            }
+            ?>
+            Web
+        </label>
         </div>
         <div>
             <label for="redes">
-                <?php
-                if(isset($servicios) && $servicios == 'Redes'){
-                    echo "<input id='redes'type='checkbox' name='hobby[]' value='Redes' checked/>";
-                } else {
-                    echo "<input id='redes'type='checkbox' name='hobby[]' value='Redes'/>";
-                }
-                ?>               
+            <?php
+            if (isset($hobby) && in_array('Redes', $hobby)) {
+                echo "<input id='redes' type='checkbox' name='hobby[]' value='Redes' checked />";
+            } else {
+                echo "<input id='redes' type='checkbox' name='hobby[]' value='Redes' />";
+            }
+            ?>               
                 Redes
             </label>
         </div>
         <div>
             <label for="sistemas">
-                <?php
-                if(isset($servicios) && $servicios == 'Sistemas'){
-                    echo "<input id='sistemas'type='checkbox' name='hobby[]' value='Sistemas' checked/>";
-                } else {
-                    echo "<input id='sistemas'type='checkbox' name='hobby[]' value='Sistemas'/>";
-                }
-                ?> 
-                Sistemas
+            <?php
+            if (isset($hobby) && in_array('Sistemas', $hobby)) {
+                echo "<input id='sistemas' type='checkbox' name='hobby[]' value='Sistemas' checked />";
+            } else {
+                echo "<input id='sistemas' type='checkbox' name='hobby[]' value='Sistemas' />";
+            }
+            ?>
+            Sistemas
             </label>
         </div>
     </div>
@@ -157,7 +157,7 @@ require_once("conexionok.php");
         <input class="botonEnviar" type="submit" value="ENVIAR">
     </div> 
     <?php
-        require_once("datosok.php");
+        
     ?>  
 </section>
 </form>      

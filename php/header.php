@@ -7,7 +7,7 @@ if (isset($_COOKIE['usuario']) && isset($_COOKIE['contraseña'])) {
 if (isset($_SESSION['id'])) {
     echo "<header>
         <a class='logotipo' href='index.php'>
-            <img class='imglogo' src='img/logofastconnect.jpg' alt='logo typeform'>
+            <img class='imglogo' src='img/logofastconnect.png' alt='logo typeform'>
         </a>
         <nav class='enlaces'>
             <a id='link' class='linkRanking' href='graficas.php'>Ranking</a>
@@ -23,7 +23,7 @@ if (isset($_SESSION['id'])) {
 } else {
     echo "<header>
     <a href='index.php' class='logotipo'>
-            <img class='imglogo' src='img/logofastconnect.jpg' alt='logo typeform'>
+            <img class='imglogo' src='img/logofastconnect.png' alt='logo typeform'>
         </a>
         <div class=enlacesBoton>
         <nav class='enlaces'>
