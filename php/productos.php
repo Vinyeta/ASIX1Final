@@ -102,9 +102,9 @@ if(isset($_POST['quitar'])){
 <div id="filtro"></div>
 <fieldset class='bordeFiltro'><legend>Selecciona aquí la categoría</legend>
         <div class='producto__filtro'>
-            <a href='productos.php?categoria=Redes#filtro' title='Redes'><img class='imgRedes' src='img/Redes.png'></a>
-            <a href='productos.php?categoria=Sistemas#filtro' title='Sistemas'><img class='imgSistemas' src='img/Sistemas.png'></a>
-            <a href='productos.php?categoria=Web#filtro' title='Web'><img class='imgWeb' src='img/Web.png'></a>
+            <a href='productos.php?categoria=Routers#filtro' title='Routers'><img class='imgRedes' src='img/Redes.png'></a>
+            <a href='productos.php?categoria=Puntos de Acceso#filtro' title='Puntos de Acceso'><img class='imgSistemas' src='img/Sistemas.png'></a>
+            <a href='productos.php?categoria=Switches#filtro' title='Switches'><img class='imgWeb' src='img/Web.png'></a>
             <a href='productos.php#filtro' title='Todos los productos'><img class='imgFiltro' src='img/Todo.png'></a>
             
         </div>
