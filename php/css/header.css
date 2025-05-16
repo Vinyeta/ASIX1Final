@@ -19,7 +19,7 @@ header{
     align-items: center;
     width:30%;
 }
-.login,.registro,.linkLogout,.linkProductos,.linkUsuarios,.linkMapa{
+.login,.registro,.linkLogout,.linkProductos,.linkUsuarios,.linkMapa,.linkRanking{
     text-decoration:none;
     color:blue;
 }

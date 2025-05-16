@@ -83,7 +83,6 @@ function dibujarGrafica(nombres, valores){
                         maxRotation: 0, 
                         align:'justify',
                         callback: function(index) {
-                            console.log(nombres[index])
                             const text= nombres[index];
                             const words = text.split(' ');
                             if (words.length > 4) {

@@ -10,6 +10,7 @@ if (isset($_SESSION['id'])) {
             <img class='imglogo' src='img/logofastconnect.jpg' alt='logo typeform'>
         </a>
         <nav class='enlaces'>
+            <a id='link' class='linkRanking' href='graficas.php'>Ranking</a>
             <a id='link' class='linkLogout' href='logout.php'>Logout</a>
             <a id='link' class='linkProductos' href='productos.php'>Productos</a> 
             <a id='link' class='linkUsuarios' href='baseDatos.php'>Usuarios</a>  
