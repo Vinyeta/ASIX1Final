@@ -116,14 +116,13 @@ if(isset($_POST['quitar'])){
 if(isset($_GET['categoria'])){
     //2.1 MOSTRAR PRODUCTOS FILTRADOS, con get se obtiene variable de categoria y se utiliza para consulta SQL
     $categoria=$_GET['categoria'];
-    $sql="SELECT productos.*
-          FROM productos
-          LEFT JOIN ventas ON productos.id = ventas.producto_id
-          WHERE productos.categoria = '$categoria'
-          AND ventas.estado IS NULL;";
-
-    $result=$con->query($sql);
-    $numProductos = $result->num_rows;
+    $sql="SELECT * FROM productos WHERE id NOT IN (
+            SELECT producto_id FROM ventas WHERE usuario_id=?)";
+    $stmt=$con->prepare($sql);
+    $stmt->bind_param("i", $_SESSION['id']);
+    $stmt->execute();
+    $result=$stmt->get_result();
+    $numProductos=$result->num_rows;
     echo "<h2 class='tituloProductos'>Mostrando los productos de: $categoria [$numProductos]</h2>";
     if($result->num_rows>0){
         echo "<section class='productos'>";
