@@ -127,16 +127,15 @@ if (isset($_POST['quitar'])) {
 </fieldset>
 
 <?php
-// MOSTRAR PRODUCTOS
-if (isset($_GET['categoria'])) {
-    // 2.1 MOSTRAR PRODUCTOS FILTRADOS
-    $categoria = $_GET['categoria'];
-    $sql="SELECT productos.*
-          FROM productos
-          LEFT JOIN ventas ON productos.id = ventas.producto_id
-          WHERE productos.categoria=? AND ventas.estado IS NULL;";
+//MOSTRAR PRODUCTOS
+if(isset($_GET['categoria'])){
+    //2.1 MOSTRAR PRODUCTOS FILTRADOS, con get se obtiene variable de categoria y se utiliza para consulta SQL
+    $categoria=$_GET['categoria'];
+    $sql="SELECT * FROM productos WHERE id NOT IN (
+            SELECT producto_id FROM ventas WHERE usuario_id=? AND categoria=?)";
     $stmt=$con->prepare($sql);
-    $stmt->bind_param("s", $categoria);
+    $stmt->bind_param("is", $_SESSION['id'], $categoria);
+
     $stmt->execute();
     $result=$stmt->get_result();
     $numProductos=$result->num_rows;
@@ -165,12 +164,14 @@ if (isset($_GET['categoria'])) {
     }
     $stmt->close();
 } else {
-    // 2.2 MOSTRAR TODOS LOS PRODUCTOS
-    $sql="SELECT productos.*
-          FROM productos
-          LEFT JOIN ventas ON productos.id = ventas.producto_id
-          WHERE ventas.estado IS NULL;";
-    $result=$con->query($sql);
+    //2.2 MOSTRAR TODOS LOS PRODUCTOS
+    $sql = "SELECT * FROM productos WHERE id NOT IN (
+                SELECT producto_id FROM ventas WHERE usuario_id=?)";
+    $stmt=$con->prepare($sql);
+    $stmt->bind_param("i", $_SESSION['id']);
+    $stmt->execute();
+    $result=$stmt->get_result();
+
     $numProductos=$result->num_rows;
     echo "<h2 class='tituloProductos'>Mostrando todos los productos [$numProductos]</h2>";
     if ($result->num_rows > 0) {

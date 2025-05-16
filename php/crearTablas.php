@@ -3,8 +3,8 @@
 require_once("conexionok.php");
 $sql="CREATE TABLE IF NOT EXISTS productos(
         id INT AUTO_INCREMENT PRIMARY KEY,
-        nombre VARCHAR(70),
-        descripcion VARCHAR(255),
+        nombre VARCHAR(200),
+        descripcion VARCHAR(200),
         precio DECIMAL(6,2),
         img VARCHAR(50),
         categoria VARCHAR(60) 	
@@ -61,8 +61,8 @@ if ($con->query($sql) === FALSE) {
 
   $sql = "CREATE TABLE IF NOT EXISTS ranking (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_producto INT,
-    nombre varchar(70),
+    id_producto INT UNIQUE,
+    nombre varchar(200),
     categoria varchar(60),
     ventas_count INT DEFAULT 0,
     FOREIGN KEY (id_producto) REFERENCES productos(id) ON DELETE SET NULL
@@ -72,20 +72,25 @@ if ($con->multi_query($sql) === FALSE) {
   echo "Error creando tabla: " . $con->error;
   } 
 
-  $sql = "CREATE IF NOT EXISTS TRIGGER after_insert_ventas
+$sql = "CREATE TRIGGER IF NOT EXISTS  after_insert_ventas
 AFTER INSERT ON ventas
 FOR EACH ROW
 BEGIN
-    INSERT INTO ranking (id_producto, nombre, categoria, ventas_count)
-    SELECT NEW.producto_id, p.nombre, p.categoria, 1
-    FROM productos p
-    WHERE p.id = NEW.producto_id
-    ON DUPLICATE KEY UPDATE 
-        ventas_count = ventas_count + 1;
+    UPDATE ranking 
+    SET ventas_count = ventas_count + 1
+    WHERE id_producto = NEW.producto_id;
 END;";
 if ($con->multi_query($sql) === FALSE) {
   echo "Error creando trigger: " . $con->error;
 }
+
+$sql = "CREATE TRIGGER IF NOT EXISTS after_insert_productos
+AFTER INSERT ON productos
+FOR EACH ROW
+BEGIN
+   INSERT INTO ranking (id,id_producto, nombre, categoria,ventas_count)
+    VALUES (NULL,NEW.id, NEW.nombre, NEW.categoria,0);
+END";
 
 $sql = "CREATE TRIGGER IF NOT EXISTS after_delete_ventas
 AFTER DELETE ON ventas
