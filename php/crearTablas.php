@@ -72,12 +72,12 @@ if ($con->multi_query($sql) === FALSE) {
   echo "Error creando tabla: " . $con->error;
   } 
 
-  $sql = "CREATE IF NOT EXISTS TRIGGER after_insert_ventas
+/*$sql = "CREATE IF NOT EXISTS TRIGGER after_insert_ventas
 AFTER INSERT ON ventas
 FOR EACH ROW
 BEGIN
     INSERT INTO ranking (id_producto, nombre, categoria, ventas_count)
-    SELECT NEW.prodId, p.nombre, p.categoria, 1
+    SELECT NEW.producto_id, p.nombre, p.categoria, 1
     FROM productos p
     WHERE p.id = NEW.producto_id
     ON DUPLICATE KEY UPDATE 
