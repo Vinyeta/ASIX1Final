@@ -71,7 +71,7 @@ if ($con->query($sql) === FALSE) {
 if ($con->multi_query($sql) === FALSE) {
   echo "Error creando tabla: " . $con->error;
   } 
-/*
+
 $sql = "CREATE TRIGGER IF NOT EXISTS  after_insert_ventas
 AFTER INSERT ON ventas
 FOR EACH ROW
@@ -104,7 +104,7 @@ END";
 if ($con->multi_query($sql) === FALSE) {
   echo "Error creando trigger: " . $con->error;
 }
-*/
+
 $con->close();
 
 ?>
