@@ -35,6 +35,7 @@ session_start();
         <input class="botonEnviar" type="submit" value="Enviar">
     </div>
     <?php
+    
         require_once("mailRecuperacion.php");
     ?>  
 </form> 

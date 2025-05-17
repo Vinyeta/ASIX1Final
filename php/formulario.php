@@ -71,7 +71,7 @@ require_once("datosok.php");
     
     <section class="sersex">
     <div class="servicios">Servicios:
-        <div>
+        <div class="servicio">
             <label for="web">
             <?php
             if (isset($hobby) && in_array('Web', $hobby)) {
@@ -83,7 +83,7 @@ require_once("datosok.php");
             Web
         </label>
         </div>
-        <div>
+        <div class="servicio">
             <label for="redes">
             <?php
             if (isset($hobby) && in_array('Redes', $hobby)) {
@@ -95,7 +95,7 @@ require_once("datosok.php");
                 Redes
             </label>
         </div>
-        <div>
+        <div class="servicio">
             <label for="sistemas">
             <?php
             if (isset($hobby) && in_array('Sistemas', $hobby)) {
@@ -156,9 +156,8 @@ require_once("datosok.php");
     <div class="submit">
         <input class="botonEnviar" type="submit" value="ENVIAR">
     </div> 
-    <?php
-        
-    ?>  
+    <div class="errors">
+    </div>
 </section>
 </form>      
 

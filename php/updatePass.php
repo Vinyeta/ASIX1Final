@@ -10,6 +10,7 @@
 <?php
     require_once("header.php");
     require_once("conexionok.php");
+    if($_SERVER['REQUEST_METHOD']!='POST'){
     $token = htmlspecialchars(trim($_GET['token']));
     $sql = $con->prepare("SELECT id, token_creacion FROM usuarios WHERE token = ?");
     $sql->bind_param("s", $token);
@@ -21,6 +22,7 @@
             $token_creacion = $fila['token_creacion'];
         }
     }
+}
 ?>
 
 </head>
@@ -28,7 +30,6 @@
 <body>
 
     <div class="contacta">Cambio de contraseña</div>
-
     <form method="post" action="updatePass.php">
         <section class="cajaFlex">
             </div>
@@ -45,7 +46,7 @@
                         </div>
                     </div>
                     <input type="hidden" name="id" value="<?php echo $id; ?>">
-                    <input type="hidden" name="token" value="<?php echo $token_creacion; ?>">
+                    <input type="hidden" name="token_creacion" value="<?php echo $token_creacion; ?>">
                 </section>
             </fieldset>
             <div class="submit">

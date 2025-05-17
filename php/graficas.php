@@ -17,7 +17,7 @@
             <button class="boton" id="btnProductos">Ranking</button>
             <button class="boton" id="btnCategorias">Categorias</button>
         </div>
-        <div>
+        <div class="canvas">
             <canvas class="miGrafica"></canvas>
         </div>
 </body>

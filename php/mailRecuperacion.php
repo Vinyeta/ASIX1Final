@@ -49,12 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $mail->isHTML(true);
                 $mail->Subject = 'Recuperación de contraseña';
                 $mail->CharSet = 'UTF-8';
-                $mail->Body = '<div>Si has olvidado tu contraseña clica el siguiente link para poder cambiar a una nueva. 
-                    Este enlace solo será válido durante 1 hora
-                    Si no estás intentando cambiar de contraseña puedes ignorar este correo</div><br>
-                    <a href="http://127.0.0.1:8000/php/updatePass.php?token=' . $token . '">Recuperar contraseña</a>';
-                $mail->AltBody = 'Tu email no es compatible con nuestro sistema de recuperaciíón de contraseña, por favor usa un 
-                    sistema de correo compatible con HTML';
+                $mail->Body = '<div>Si has olvidado tu contraseña clica en el link de abajo para poder actualizarla.</div> 
+                    <div>Este enlace <b>solo será válido durante 1 hora.</b></div>
+                    <div>Si no estás intentando cambiar de contraseña puedes ignorar este correo</div><br>
+                    <a href="https://localhost/ASIX1Final/php/updatePass.php?token=' . $token . '">Recuperar contraseña</a>';
+                $mail->AltBody = '';
                 $mail->addEmbeddedImage('img/logofastconnect.jpg', 'logo');
                 $mail->send();
                 echo 'El mensaje ha sido enviado';
