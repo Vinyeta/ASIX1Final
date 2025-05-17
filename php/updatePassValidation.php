@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (!$sql->execute()) {
                 echo "<div class='errores'><div>Error al actualizar la contraseña</div></div>";
             } else {
-                echo "<div class='error'><div>Contraseña actualizada correctamente, redirigiendo a la página de inicio de sesión en 
+                echo "<div class='errores'><div>Contraseña actualizada correctamente, redirigiendo a la página de inicio de sesión en 
                       <span id='countdown'>3</span> segundos...</div></div>";
                 echo "<script type='text/javascript'>
                 let countdown = 3;
