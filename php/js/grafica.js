@@ -80,7 +80,7 @@ function dibujarGrafica(nombres, valores){
                 x: {
                     ticks: {
                         color: 'black',
-                        maxRotation: 0, 
+                       /* maxRotation: 0, 
                         align:'justify',
                         callback: function(index) {
                             const text= nombres[index];
@@ -100,7 +100,7 @@ function dibujarGrafica(nombres, valores){
                             } else {
                                 return text; 
                             }
-                        }
+                        }*/
                     },
                 }
             },
