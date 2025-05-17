@@ -4,7 +4,7 @@ require_once("conexionok.php");
 $sql="CREATE TABLE IF NOT EXISTS productos(
         id INT AUTO_INCREMENT PRIMARY KEY,
         nombre VARCHAR(200),
-        descripcion VARCHAR(200),
+        descripcion VARCHAR(255),
         precio DECIMAL(6,2),
         img VARCHAR(50),
         categoria VARCHAR(60) 	
