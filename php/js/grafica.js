@@ -11,9 +11,9 @@ const mostrarProductos=()=>{
         data.forEach(item => {
             nombres.push(item.nombre);
             valores.push(item.ventas_count);
-            dibujarGrafica(nombres, valores);
-            locucion(`El producto más vendido es ${item.producto} con ${item.ventas_count} productos vendidos`);
         });
+        dibujarGrafica(nombres, valores);
+        locucion(`El producto más vendido es ${nombres[0]} con ${valores[0]} productos vendidos`);
     })
     .catch(error => {
         console.error('Error al obtener los datos:', error);
@@ -28,9 +28,9 @@ const mostrarCategorias = ()=>{
         data.forEach(item => {
             nombres.push(item.categoria);
             valores.push(item.total_ventas);
-            dibujarGrafica(nombres, valores);
-            locucion(`La categoria más vendida es ${item.categoria} con ${item.total_ventas} productos vendidos`);
         });
+        dibujarGrafica(nombres, valores);
+        locucion(`La categoria más vendida es ${nombres[0]} con ${valores[0]} productos vendidos`);
     })
     .catch(error => {
         console.error('Error al obtener los datos:', error);
