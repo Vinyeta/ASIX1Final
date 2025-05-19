@@ -1,5 +1,9 @@
 <?php
     session_start();
+    session_start();
+    if(!isset($_SESSION['id'])){
+        header("Location: index.php");
+    }
     require_once("header.php");
     require_once("conexionok.php");
 ?>
