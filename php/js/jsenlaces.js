@@ -8,7 +8,7 @@ function enlacesColor(){
     const productos=document.querySelector(".linkProductos");
     const usuarios=document.querySelector(".linkUsuarios");
     const mapa=document.querySelector(".linkMapa");
-
+    const ranking=document.querySelector(".linkRanking");
     if(enlace.includes("logout.php")){
         logout.style.color="red";
         logout.style.cursor="default";
@@ -49,6 +49,17 @@ function enlacesColor(){
         productos.style.color="blue";
         usuarios.style.color="blue";
         mapa.addEventListener("click",evento);
+        function evento(event){
+            event.preventDefault();
+        }
+    }
+    if(enlace.includes("graficas.php")){
+        ranking.style.color="red";
+        ranking.style.cursor="default";
+        productos.style.color="blue";
+        usuarios.style.color="blue";
+        mapa.style.color="blue";
+        ranking.addEventListener("click",evento);
         function evento(event){
             event.preventDefault();
         }

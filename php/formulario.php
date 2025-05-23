@@ -3,7 +3,7 @@ session_start();
 
 require_once("header.php");
 require_once("conexionok.php");
-
+require_once("datosok.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -28,7 +28,13 @@ require_once("conexionok.php");
                 <label for="nombre">Usuario: </label>
             </div>
             <div class="name1">
-                <input class="inputName" type="text" size="30" title="Usuario" name="usuario" autofocus placeholder="Nombre de usuario"/>
+                <?php
+                if(isset($usuario)){
+                    echo "<input  value='$usuario' class='inputName' type='text' size='30' title='Usuario' name='usuario' autofocus placeholder='Nombre de usuario'/>";
+                } else {
+                    echo "<input class='inputName' type='text' size='30' title='Usuario' name='usuario' autofocus placeholder='Nombre de usuario'/>";
+                }
+                ?>
             </div>
         </div>
         <div class="cajaPassword">
@@ -37,7 +43,13 @@ require_once("conexionok.php");
         </div>
         <div class="inputKey">
             <img class="ojoAbierto" src="img/eyeOpen.svg"/>
-            <input class="pasword"type="password" patter=".{8,}" id="password" size="30" title="Contraseña" name="contraseña" autofocus placeholder="Contraseña">   
+            <?php
+            if(isset($password)){
+                echo "<input value='$password' class='pasword'type='password' patter='.{8,}' id='password' size='30' title='Contraseña' name='contraseña' autofocus placeholder='Contraseña'>";
+            } else {
+                echo "<input class='pasword'type='password' patter='.{8,}' id='password' size='30' title='Contraseña' name='contraseña' autofocus placeholder='Contraseña'>";
+            }
+            ?>   
         </div>
         </div>
         <div class="emails">
@@ -45,7 +57,13 @@ require_once("conexionok.php");
             <label for="mail">E-mail: </label>
         </div>
         <div>
-            <input class="inputEmail" type="text" size="30" title="E-mail" name="email" autofocus placeholder="Escribe tu e-mail"/>
+            <?php
+            if(isset($email)){
+                echo "<input value='$email' class='inputEmail' type='text' size='30' title='E-mail' name='email' autofocus placeholder='Escribe tu e-mail'/>";
+            } else {
+                echo "<input class='inputEmail' type='text' size='30' title='E-mail' name='email' autofocus placeholder='Escribe tu e-mail'/>";
+            }
+            ?>
         </div>
         </div>
     </section>  
@@ -53,38 +71,77 @@ require_once("conexionok.php");
     
     <section class="sersex">
     <div class="servicios">Servicios:
-        <div>
-        <label for="web">
-            <input id="web"type="checkbox" name="hobby[]" value="Web"/>Web
+        <div class="servicio">
+            <label for="web">
+            <?php
+            if (isset($hobby) && in_array('Web', $hobby)) {
+                echo "<input id='web' type='checkbox' name='hobby[]' value='Web' checked />";
+            } else {
+                echo "<input id='web' type='checkbox' name='hobby[]' value='Web' />";
+            }
+            ?>
+            Web
         </label>
         </div>
-        <div>
+        <div class="servicio">
             <label for="redes">
-                <input id="redes"type="checkbox" name="hobby[]" value="Redes"/>Redes
+            <?php
+            if (isset($hobby) && in_array('Redes', $hobby)) {
+                echo "<input id='redes' type='checkbox' name='hobby[]' value='Redes' checked />";
+            } else {
+                echo "<input id='redes' type='checkbox' name='hobby[]' value='Redes' />";
+            }
+            ?>               
+                Redes
             </label>
         </div>
-        <div>
+        <div class="servicio">
             <label for="sistemas">
-            <input id="sistemas"type="checkbox" name="hobby[]" value="Sistemas"/>Sistemas
+            <?php
+            if (isset($hobby) && in_array('Sistemas', $hobby)) {
+                echo "<input id='sistemas' type='checkbox' name='hobby[]' value='Sistemas' checked />";
+            } else {
+                echo "<input id='sistemas' type='checkbox' name='hobby[]' value='Sistemas' />";
+            }
+            ?>
+            Sistemas
             </label>
         </div>
     </div>
         <div class="cajaSexo">
             <label for="sexos">Sexo:
             <div>
-                <input id="sexo1" name="sexos"type="radio" value="Mujer">
+                <?php
+                if(isset($sexo) && $sexo == 'Mujer'){
+                    echo "<input id='sexo1' name='sexos'type='radio' value='Mujer' checked>";
+                } else {
+                    echo "<input id='sexo1' name='sexos'type='radio' value='Mujer'>";
+                }
+                ?>
                 <label for="sexo1">
                 <span class="mujer"></span>
                 <span>Mujer</span></label>
             </div>
             <div>
-                <input id="sexo2" name="sexos"type="radio" value="Hombre">
-                <label for="sexo2">
+                <?php
+                if(isset($sexo) && $sexo == 'Hombre'){
+                    echo "<input id='sexo2' name='sexos'type='radio' value='Hombre' checked>";
+                } else {
+                    echo "<input id='sexo2' name='sexos'type='radio' value='Hombre'>";
+                }
+                ?>
+                <label for="sexo2"> 
                 <span class="hombre"></span>
                 <span>Hombre</span></label>
             </div>
-            <div>
-                <input id="sexo3" name="sexos"type="radio" value="NS-NC">
+            <div>         
+                <?php
+                if(isset($sexo) && $sexo == 'NS-NC'){
+                    echo "<input id='sexo3' name='sexos'type='radio' value='NS-NC' checked>";
+                } else {
+                    echo "<input id='sexo3' name='sexos'type='radio' value='NS-NC'>";
+                }
+                ?>
                 <label for="sexo3">
                 <span class="nsnc"></span>
                 <span>NS/NC</span></label>
@@ -99,9 +156,8 @@ require_once("conexionok.php");
     <div class="submit">
         <input class="botonEnviar" type="submit" value="ENVIAR">
     </div> 
-    <?php
-        require_once("datosok.php");
-    ?>  
+    <div class="errors">
+    </div>
 </section>
 </form>      
 
