@@ -1,7 +1,7 @@
 <?php
 //PLANTILLA DE CONEXION A BASE DE DATOS
 //crear constantes para la base de datos
-define('SERVIDOR','localhost');
+define('SERVIDOR','mariadb');
 define('USUARIO','typeformAdmin');
 define('PASSWORD','typeform');
 //nombre de la base de datos
