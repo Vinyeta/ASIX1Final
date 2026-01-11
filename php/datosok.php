@@ -6,7 +6,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     if(empty($_POST['usuario'])){
         $errores[]="El campo usuario es obligatorio";
     } else {
-        $usuario=htmlspecialchars($_POST['usuario']);
+        $usuario=trim($_POST['usuario']);
         if(strlen($usuario)<3) {
             $errores[]="El usuario debe tener al menos 3 caracteres";
         }
@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     if(empty($_POST['contraseña'])){
         $errores[]="El campo contraseña es obligatorio";
     } else {
-        $password=htmlspecialchars(trim($_POST['contraseña']));
+        $password=trim($_POST['contraseña']);
         if(strlen($password)<6){
             $errores[]="La contraseña debe tener al menos 6 caracteres";
         }
@@ -79,7 +79,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 WHERE email=?";
         $stmtUpdate = $con->prepare($sql); 
         $stmtUpdate->bind_param('ssssss', $usuario, $passwordHash, $email, $hobbyJson, $sexo, $email);
-
+        
         if ($stmtUpdate->execute()) {
             echo "<div class='error'>El email $email ya existe en la base de datos, 
                   se ha actualizado la nueva información proporcionada en el formulario</div>
