@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($_POST['contraseña'])){
         $errores[]="El campo contraseña es obligatorio";
     } else {
-        $passwd=htmlspecialchars(trim($_POST['contraseña']));
+        $passwd=trim($_POST['contraseña']);
         if(strlen($passwd)<6){
             $errores[]="La contraseña debe tener al menos 6 caracteres";
         }
